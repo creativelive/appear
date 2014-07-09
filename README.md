@@ -10,7 +10,7 @@ Then call `appear()` and pass in an object with the following:
 
 - `init` *optional* function to run when dom is interactive, but appear.js has not yet started tracking items.
 - `elements` *required* either an htmlcollection or a function that returns an htmlcollection of items to track. The dom will be interactive at this point.
-- `appear` *optional* unction to run when an element is in view, passed the element that has come into view. If defined then appear.js will track an item until it comes into view
+- `appear` *optional* function to run when an element is in view, passed the element that has come into view. If defined then appear.js will track an item until it comes into view
 - `disappear` *optional* function to run when an element goes out of view, passed the element that has come into view. If defined then appear.js will track an item until it goes out of view
 - `reappear` *optional* boolean, set to keep tracking an object for successfuive appears and dissappears, false by default
 - `bounds` *optional* increase to the threshold of the size of the element so it can be considered "viewable" before it is actually in the viewport (default 200)
