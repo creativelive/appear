@@ -1,0 +1,19 @@
+{
+  "rules": {
+    "quotes": [2, "single"],
+    "no-unused-vars": [2, {"vars": "all", "args": "none"}],
+    "consistent-this": [2, "self"],
+    "no-use-before-define": [2, "nofunc"],
+    "consistent-return": 0,
+    "camelcase": 0,
+    "no-underscore-dangle": 0,
+    "no-new": 0
+  },
+  "globals": {
+    "appear": true
+  },
+  "env":{
+    "browser": true,
+    "node": true
+  }
+}

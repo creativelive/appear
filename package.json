@@ -1,0 +1,33 @@
+{
+  "name": "appear",
+  "version": "0.0.1",
+  "description": "utility to run functions when dom elements are visible",
+  "kewords": "detect viewable elements dom lazy load scroll ",
+  "main": "appear.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Hadley (https://github.com/diffsky)",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.5",
+    "gulp-strip-debug": "^0.3.0",
+    "gulp-uglify": "^0.3.1",
+    "gulp-eslint": "^0.1.8",
+    "gulp-header": "^1.0.5"
+  },
+  "dependencies": {
+    "gulp-rename": "^1.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/creativelive/appear.git"
+  },
+  "bugs": {
+    "url": "https://github.com/creativelive/appear/issues"
+  },
+  "homepage": "https://github.com/creativelive/appear"
+}
