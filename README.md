@@ -1,4 +1,4 @@
-# [![appear](https://raw.githubusercontent.com/creativelive/appear/master/assets/appear-32.png)] appear
+# ![appear](https://raw.githubusercontent.com/creativelive/appear/master/assets/appear-64.png) appear
 
 **appear** tracks the visibility of dom elements and fires user defined callbacks when the appear and disappear from view.
 
