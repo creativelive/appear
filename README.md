@@ -1,6 +1,6 @@
 # ![appear](https://raw.githubusercontent.com/creativelive/appear/master/assets/appear-64.png) appear
 
-**appear** tracks the visibility of dom elements and fires user defined callbacks as they appear and disappear from view.
+Track the visibility of dom elements and fire user defined callbacks as they appear and disappear from view.
 
 ## Usage
 
