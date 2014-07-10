@@ -44,7 +44,7 @@ View `test/index.html` in a browser for more example usage.
 
 Calling `appear(options)` returns an object with the following:
 
-- `destory` function - call it to destroy the appear instance and stop listening for changes
+- `destroy` function - call it to destroy the appear instance and stop listening for changes
 - `elements` the array of elements the appear instance is tracking
 
 
