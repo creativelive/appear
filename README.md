@@ -15,6 +15,8 @@ Then call `appear()` and pass in an object with the following options:
 - `reappear` *optional* boolean, set to keep tracking an object for successfuive appears and dissappears, false by default
 - `bounds` *optional* increase to the threshold of the size of the element so it can be considered "viewable" before it is actually in the viewport (default 200)
 - `debounce` *optional* appear.js tracks elements on browser scroll and resize, for performance reasons this check is "debounced" to only happen once for multiple events, 50ms after the last event ends. You can override this value here.
+- `deltaSpeed` *optional* appear.js will also check for items on continuous slow scrolling, you can controll how slow the scrolling should be via deltaSpeed, default is 50 (pixels)
+- `deltaTimeout` *optional* after a succesful delta speed check, when will appear.js check the viewable items again, default is 500ms
 - `done` *optional* function called when appear.js is no longer tracking any items and event listeners have been removed
 
 Example usage:
