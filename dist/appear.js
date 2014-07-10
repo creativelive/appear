@@ -1,4 +1,4 @@
-/* appear 0.0.3 */
+/* appear 0.0.4 */
 appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
