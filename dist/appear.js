@@ -1,4 +1,4 @@
-/* appear 0.0.1 */
+/* appear 0.0.2 */
 appear = function(obj){
   'use strict';
 
@@ -120,21 +120,24 @@ appear = function(obj){
       } else {
         els = opts.elements;
       }
-      //  put elements into an array object to work with
-      elementsLength = els.length;
-      for(var i = 0; i < elementsLength; i += 1) {
-        elements.push(els[i]);
-        reappear.push(true);
-      }
-      // initial appear check before any scroll or resize event
-      doCheckAppear();
+      if(els) {
+        //  put elements into an array object to work with
+        elementsLength = els.length;
+        for(var i = 0; i < elementsLength; i += 1) {
+          elements.push(els[i]);
+          reappear.push(true);
+        }
+        // initial appear check before any scroll or resize event
+        doCheckAppear();
 
-      // add relevant listeners
-      addEventListener('scroll', checkAppear);
-      addEventListener('resize', checkAppear);
+        // add relevant listeners
+        addEventListener('scroll', checkAppear);
+        addEventListener('resize', checkAppear);
+      }
     }
 
     return function(obj) {
+      obj = obj || {};
       // assign the fn to execute when a node is visible
       opts = {
         // a function to be run when the dom is ready (allows for any setup work)
@@ -166,7 +169,8 @@ appear = function(obj){
         // provide a means to stop monitoring all elements
         destroy: function destroy() {
           end();
-        }
+        },
+        elements: elements
       };
 
     };

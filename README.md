@@ -6,7 +6,7 @@ Track the visibility of dom elements and fire user defined callbacks as they app
 
 Include the appear.js in your page, it has no dependencies.
 
-Then call `appear()` and pass in an object with the following:
+Then call `appear()` and pass in an object with the following options:
 
 - `init` *optional* function to run when dom is interactive, but appear.js has not yet started tracking items.
 - `elements` *required* either an htmlcollection or a function that returns an htmlcollection of items to track. The dom will be interactive at this point.
@@ -39,6 +39,12 @@ appear({
 ```
 
 View `test/index.html` in a browser for more example usage.
+
+Calling `appear(options)` returns an object with the following:
+
+- `destory` function - call it to destroy the appear instance and stop listening for changes
+- `elements` the array of elements the appear instance is tracking
+
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "appear",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "utility to run functions when dom elements are visible",
   "kewords": "detect viewable elements dom lazy load scroll ",
   "main": "appear.js",
@@ -8,7 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "node_modules/gulp/bin/gulp.js build"
   },
   "author": "Matthew Hadley (https://github.com/diffsky)",
   "license": "MIT",
