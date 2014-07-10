@@ -1,4 +1,4 @@
-/* appear 0.0.4 */
+/* appear 0.0.5 */
 appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
@@ -8,7 +8,6 @@ appear = (function(){
     if ( scrollLastPos != null ){ // && newPos < maxScroll
       scroll.velocity = newPos - scrollLastPos;
       scroll.delta = (scroll.velocity >= 0) ? scroll.velocity : (-1 * scroll.velocity);
-      
       
     }
     scrollLastPos = newPos;
