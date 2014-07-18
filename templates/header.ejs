@@ -127,7 +127,7 @@ li {
    height: 32px;
    width: 32px;
    margin: 0 12px 0 0;
-   background-image: url(/assets/appear-64.png);
+   background-image: url(https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png);
    background-size: contain
 }*/
 
@@ -236,11 +236,11 @@ var a = appear((function(){
   disappear: function disappear(el){
     trick.style.display = 'block';
     if(++count > 1 && rabbit && Math.floor((Math.random() * 5) + 1) === 1) {
-      hat.setAttribute('src', '/assets/magic_hat_empty.png');
+      hat.setAttribute('src', 'https://cdn.rawgit.com/creativelive/appear/715cd5df6c518493dc406365b0026cc7da92cf78/assets/magic-hat-empty.png');
       rabbit = false;
     } else if (!rabbit)  {
       rabbit = true;
-      hat.setAttribute('src', '/assets/magic_hat.png');
+      hat.setAttribute('src', 'https://cdn.rawgit.com/creativelive/appear/715cd5df6c518493dc406365b0026cc7da92cf78/assets/magic-hat.png');
     }
   },
   deltaSpeed: 100,
@@ -256,7 +256,7 @@ var a = appear((function(){
 
 <div class="cover">
   <div class="title">
-    <h1>appear<img src="/assets/appear-64.png"/>js</h1>
+    <h1>appear<img src="https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png"/>js</h1>
   </div>
 </div>
 <div class="content">
