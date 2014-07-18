@@ -9,6 +9,8 @@ module.exports = function(gulp, conf) {
   gulp.task('ghpage', function(cb) {
 
     var readme = fs.readFileSync(path.join(process.cwd(), 'README.md'), 'utf8');
+    var appear = fs.readFileSync(path.join(process.cwd(), 'dist', 'appear.min.js'), 'utf8');
+
     readme = readme.split('\n');
     // remove H1
     readme.shift();
@@ -17,7 +19,10 @@ module.exports = function(gulp, conf) {
 
     var templates = ejstpl({cwd: path.join(process.cwd(), 'templates')});
 
-    fs.writeFileSync(path.join(process.cwd(), 'ghpage', 'index.html'), templates.main({content: readme}));
+    fs.writeFileSync(path.join(process.cwd(), 'ghpage', 'index.html'), templates.main({
+      appear: appear,
+      content: readme
+    }));
     cb();
 
   });

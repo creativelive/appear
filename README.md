@@ -53,7 +53,7 @@ View `test/index.html` in a browser for more example usage.
 
 ## Download
 
-Here.
+[source](https://github.com/creativelive/appear/blob/master/dist/appear.js) or [minified](https://github.com/creativelive/appear/blob/master/dist/appear.min.js)
 
 ---
 

@@ -211,14 +211,12 @@ hr {
 .token.entity {
   cursor: help;
 }
-
-
-
-
 </style>
-<script src="/lib/appear.js"></script>
 <script>
-var a = appear((function(){
+<%- appear %>
+</script>
+<script>
+appear((function(){
   var trick, hat, rabbit = true, count = 0;
   return {
   init: function(){
