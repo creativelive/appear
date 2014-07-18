@@ -4,22 +4,22 @@ Track the visibility of dom elements and fire user defined callbacks as they app
 
 ## Usage
 
-Include the appear.js in your page, it has no dependencies.
+Include appear.js in your page, it has no dependencies.
 
-Then call `appear()` and pass in an object with the following options:
+Call `appear()` passing in an object with the following:
 
-- `init` *optional* function to run when dom is interactive, but appear.js has not yet started tracking items.
-- `elements` *required* either an htmlcollection or a function that returns an htmlcollection of items to track. The dom will be interactive at this point.
-- `appear` *optional* function to run when an element is in view, passed the element that has come into view. If defined then appear.js will track an item until it comes into view
-- `disappear` *optional* function to run when an element goes out of view, passed the element that has come into view. If defined then appear.js will track an item until it goes out of view
-- `reappear` *optional* boolean, set to keep tracking an object for successfuive appears and dissappears, false by default
-- `bounds` *optional* increase to the threshold of the size of the element so it can be considered "viewable" before it is actually in the viewport (default 200)
-- `debounce` *optional* appear.js tracks elements on browser scroll and resize, for performance reasons this check is "debounced" to only happen once for multiple events, 50ms after the last event ends. You can override this value here.
-- `deltaSpeed` *optional* appear.js will also check for items on continuous slow scrolling, you can controll how slow the scrolling should be via deltaSpeed, default is 50 (pixels)
-- `deltaTimeout` *optional* after a succesful delta speed check, when will appear.js check the viewable items again, default is 500ms
-- `done` *optional* function called when appear.js is no longer tracking any items and event listeners have been removed
+- `init` function to run when dom is interactive, but before appear.js has started tracking.
+- `elements` *required* function that returns an htmlcollection of elements to track. The dom will be interactive at this point. Can alternatively be an existing htmlcollection instead of a function.
+- `appear` function to run when an element is in view, passed the element that has come into view. If defined then appear.js will track elements until they come into view.
+- `disappear` function to run when an element goes out of view, passed the element that has gone out of view. If defined then appear.js will track elements until they go out of view.
+- `reappear` if true appear.js will keep tracking elements for successfuive appears and dissappears. Default is false.
+- `bounds` increase, in pixels, to the threshold size of the element so it can be "viewable" before it is actually in the viewport.
+- `debounce` appear.js tracks elements on browser scroll and resize, for performance reasons this check is "debounced" to only happen once for multiple events, 50ms after the last event ends. You can override this value here.
+- `deltaSpeed` in addition to debouncing, appear.js will also check for items during continuous slow scrolling, you can controll how slow the scrolling should be via this value. Default is 50 (pixels).
+- `deltaTimeout` after a succesful delta speed check, appear.js will not check for viewable items again until this timeout passes. Default is 500 (ms).
+- `done` function called when appear.js is no longer tracking any items and event listeners have been removed.
 
-Example usage:
+## Example
 
 ```javascript
 appear({
@@ -42,12 +42,19 @@ appear({
 
 View `test/index.html` in a browser for more example usage.
 
-Calling `appear(options)` returns an object with the following:
+`appear()` will return an object with the following:
 
-- `destroy` function - call it to destroy the appear instance and stop listening for changes
-- `elements` the array of elements the appear instance is tracking
+- `elements` the array of elements the appear instance is tracking.
+- `trigger()` force a check for viewable elements.
+- `pause()` stop tracking elements.
+- `resume()` resume tracking elements.
+- `destroy()` destroy the appear instance, permanently stop tracking elements.
 
+
+## Download
+
+Here.
 
 ---
 
-appear.js logo designed by [Magicon](http://thenounproject.com/magicon) from the [Noun Project](http://thenounproject.com/) :: Creative Commons – Attribution (CC BY 3.0)
+appear.js logo designed by [Magicon](http://thenounproject.com/magicon) from the [Noun Project](http://thenounproject.com/) :: Creative Commons - Attribution (CC BY 3.0)

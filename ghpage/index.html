@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>appear.js</title>
+<link href='http://fonts.googleapis.com/css?family=Old+Standard+TT' rel='stylesheet' type='text/css'>
+<style>
+/*  [normalize css](https://github.com/necolas/normalize.css) */
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block}audio,canvas,video{display:inline-block;*display:inline;*zoom:1;}audio:not([controls]){display:none}[hidden]{display:none}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}html,button,input,select,textarea{font-family:sans-serif}body{margin:0}a:focus{outline:thin dotted}a:hover,a:active{outline:0}h1{font-size:2em;margin:0.67em 0;}h2{font-size:1.5em;margin:0.83em 0;}h3{font-size:1.17em;margin:1em 0;}h4{font-size:1em;margin:1.33em 0;}h5{font-size:0.83em;margin:1.67em 0;}h6{font-size:0.75em;margin:2.33em 0;}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}blockquote{margin:1em 40px}dfn{font-style:italic}mark{background:#ff0;color:#000;}p,pre{margin:1em 0}pre,code,kbd,samp{font-family:monospace,serif;_font-family:'courier new',monospace;font-size:1em;}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word;}q{quotes:none}q:before,q:after{content:'';content:none;}small{font-size:75%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em}sub{bottom:-0.25em}dl,menu,ol,ul{margin:1em 0}dd{margin:0 0 0 40px}menu,ol,ul{padding:0 0 0 40px}nav ul,nav ol{list-style:none;list-style-image:none;}img{border:0;-ms-interpolation-mode:bicubic;}svg:not(:root){overflow:hidden}figure{margin:0}form{margin:0}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;white-space:normal;*margin-left:-7px;}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle;}button,input{line-height:normal;}button,input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button;*overflow:visible;}button[disabled],input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;*height:13px;*width:13px;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-decoration,input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}
+
+/* entire viewport cover div with vertical/horizontal centered title */
+html, body {
+  height: 100%;
+  background-color: #FFF;
+}
+.cover {
+  height: 100%;
+}
+.title {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;  height: 250px;
+}
+
+html {
+  font-family:"Helvetica Neue",Helvetica,Verdana,sans-serif;
+  color: #000;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family:"Old Standard TT";
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 5px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 6em;
+}
+
+h1 img {
+  height: 32px;
+}
+
+h2 {
+  font-size: 70px;
+  width:95%;
+  border-bottom: 2px solid black;
+  padding: 0 10px;
+  margin-right: 40px
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 200px 10px 100px 10px;
+}
+
+pre code {
+  font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+  display: block;
+  padding: 9.5px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  white-space: pre;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+code {
+  font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+  padding: 4px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  white-space: pre;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+.hat {
+    margin-bottom:-5px;
+    width:100%;
+    max-width:696px;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.trick {
+  bottom:0;
+  left:0;
+  width: 100%;
+  position:fixed;
+  height: 40px;
+  background-color: black;
+}
+
+.bar {
+  height: 40px;
+  background-color: black;
+}
+
+ul {
+  margin:0 0 0 20px;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  line-height: 1.6em;
+  list-style-type: circle;
+  /*list-style-type: none;*/
+
+}
+
+/*li:before{
+   content: '';
+   display: inline-block;
+   height: 32px;
+   width: 32px;
+   margin: 0 12px 0 0;
+   background-image: url(/assets/appear-64.png);
+   background-size: contain
+}*/
+
+hr {
+  margin-top: 50px;
+  margin-right: 1.8%;
+  border: 1px solid black;
+}
+
+/* http://prismjs.com/download.html?themes=prism-funky&languages=markup+css+clike+javascript */
+/**
+ * prism.js Funky theme
+ * Based on “Polyfilling the gaps” talk slides http://lea.verou.me/polyfilling-the-gaps/
+ * @author Lea Verou
+ */
+
+
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .2em;
+  border-radius: .3em;
+  box-shadow: none;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #aaa;
+}
+
+.token.punctuation {
+  color: #999;
+}
+
+.namespace {
+  opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: #0cf;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.builtin {
+  color: #0cf;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.toke.variable {
+  color: #aaa;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: deeppink;
+}
+
+
+.token.regex,
+.token.important {
+  color: orange;
+}
+
+.token.important {
+  font-weight: bold;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+
+
+
+</style>
+<script src="/lib/appear.js"></script>
+<script>
+var a = appear((function(){
+  var trick, hat, rabbit = true, count = 0;
+  return {
+  init: function(){
+    trick = document.getElementsByClassName('trick')[0];
+    hat = document.getElementsByClassName('hat')[0];
+  },
+  // function to get all elements to track
+  elements: function elements(){
+    return document.getElementsByClassName('hat');
+  },
+  // function to run when an element is in view
+  appear: function appear(el){
+    trick.style.display = 'none';
+  },
+  disappear: function disappear(el){
+    trick.style.display = 'block';
+    if(++count > 1 && rabbit && Math.floor((Math.random() * 5) + 1) === 1) {
+      hat.setAttribute('src', '/assets/magic_hat_empty.png');
+      rabbit = false;
+    } else if (!rabbit)  {
+      rabbit = true;
+      hat.setAttribute('src', '/assets/magic_hat.png');
+    }
+  },
+  deltaSpeed: 100,
+  deltaTimeout: 250,
+  reappear: true,
+  bounds: 0
+  };
+}()));
+</script>
+<script>
+/* http://prismjs.com/download.html?themes=prism&languages=clike+javascript */
+var self=typeof window!="undefined"?window:{},Prism=function(){var e=/\blang(?:uage)?-(?!\*)(\w+)\b/i,t=self.Prism={util:{encode:function(e){return e instanceof n?new n(e.type,t.util.encode(e.content)):t.util.type(e)==="Array"?e.map(t.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},clone:function(e){var n=t.util.type(e);switch(n){case"Object":var r={};for(var i in e)e.hasOwnProperty(i)&&(r[i]=t.util.clone(e[i]));return r;case"Array":return e.slice()}return e}},languages:{extend:function(e,n){var r=t.util.clone(t.languages[e]);for(var i in n)r[i]=n[i];return r},insertBefore:function(e,n,r,i){i=i||t.languages;var s=i[e],o={};for(var u in s)if(s.hasOwnProperty(u)){if(u==n)for(var a in r)r.hasOwnProperty(a)&&(o[a]=r[a]);o[u]=s[u]}return i[e]=o},DFS:function(e,n){for(var r in e){n.call(e,r,e[r]);t.util.type(e)==="Object"&&t.languages.DFS(e[r],n)}}},highlightAll:function(e,n){var r=document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');for(var i=0,s;s=r[i++];)t.highlightElement(s,e===!0,n)},highlightElement:function(r,i,s){var o,u,a=r;while(a&&!e.test(a.className))a=a.parentNode;if(a){o=(a.className.match(e)||[,""])[1];u=t.languages[o]}if(!u)return;r.className=r.className.replace(e,"").replace(/\s+/g," ")+" language-"+o;a=r.parentNode;/pre/i.test(a.nodeName)&&(a.className=a.className.replace(e,"").replace(/\s+/g," ")+" language-"+o);var f=r.textContent;if(!f)return;var l={element:r,language:o,grammar:u,code:f};t.hooks.run("before-highlight",l);if(i&&self.Worker){var c=new Worker(t.filename);c.onmessage=function(e){l.highlightedCode=n.stringify(JSON.parse(e.data),o);t.hooks.run("before-insert",l);l.element.innerHTML=l.highlightedCode;s&&s.call(l.element);t.hooks.run("after-highlight",l)};c.postMessage(JSON.stringify({language:l.language,code:l.code}))}else{l.highlightedCode=t.highlight(l.code,l.grammar,l.language);t.hooks.run("before-insert",l);l.element.innerHTML=l.highlightedCode;s&&s.call(r);t.hooks.run("after-highlight",l)}},highlight:function(e,r,i){var s=t.tokenize(e,r);return n.stringify(t.util.encode(s),i)},tokenize:function(e,n,r){var i=t.Token,s=[e],o=n.rest;if(o){for(var u in o)n[u]=o[u];delete n.rest}e:for(var u in n){if(!n.hasOwnProperty(u)||!n[u])continue;var a=n[u],f=a.inside,l=!!a.lookbehind,c=0;a=a.pattern||a;for(var h=0;h<s.length;h++){var p=s[h];if(s.length>e.length)break e;if(p instanceof i)continue;a.lastIndex=0;var d=a.exec(p);if(d){l&&(c=d[1].length);var v=d.index-1+c,d=d[0].slice(c),m=d.length,g=v+m,y=p.slice(0,v+1),b=p.slice(g+1),w=[h,1];y&&w.push(y);var E=new i(u,f?t.tokenize(d,f):d);w.push(E);b&&w.push(b);Array.prototype.splice.apply(s,w)}}}return s},hooks:{all:{},add:function(e,n){var r=t.hooks.all;r[e]=r[e]||[];r[e].push(n)},run:function(e,n){var r=t.hooks.all[e];if(!r||!r.length)return;for(var i=0,s;s=r[i++];)s(n)}}},n=t.Token=function(e,t){this.type=e;this.content=t};n.stringify=function(e,r,i){if(typeof e=="string")return e;if(Object.prototype.toString.call(e)=="[object Array]")return e.map(function(t){return n.stringify(t,r,e)}).join("");var s={type:e.type,content:n.stringify(e.content,r,i),tag:"span",classes:["token",e.type],attributes:{},language:r,parent:i};s.type=="comment"&&(s.attributes.spellcheck="true");t.hooks.run("wrap",s);var o="";for(var u in s.attributes)o+=u+'="'+(s.attributes[u]||"")+'"';return"<"+s.tag+' class="'+s.classes.join(" ")+'" '+o+">"+s.content+"</"+s.tag+">"};if(!self.document){if(!self.addEventListener)return self.Prism;self.addEventListener("message",function(e){var n=JSON.parse(e.data),r=n.language,i=n.code;self.postMessage(JSON.stringify(t.tokenize(i,t.languages[r])));self.close()},!1);return self.Prism}var r=document.getElementsByTagName("script");r=r[r.length-1];if(r){t.filename=r.src;document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",t.highlightAll)}return self.Prism}();typeof module!="undefined"&&module.exports&&(module.exports=Prism);;
+Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|(^|[^:])\/\/.*?(\r?\n|$))/g,lookbehind:!0},string:/("|')(\\?.)*?\1/g,"class-name":{pattern:/((?:(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/ig,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/g,"boolean":/\b(true|false)\b/g,"function":{pattern:/[a-z0-9_]+\(/ig,inside:{punctuation:/\(/}},number:/\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee]-?\d+)?)\b/g,operator:/[-+]{1,2}|!|<=?|>=?|={1,3}|&{1,2}|\|?\||\?|\*|\/|\~|\^|\%/g,ignore:/&(lt|gt|amp);/gi,punctuation:/[{}[\];(),.:]/g};;
+Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|function|get|if|implements|import|in|instanceof|interface|let|new|null|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/g,number:/\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee]-?\d+)?|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/<script[\w\W]*?>[\w\W]*?<\/script>/ig,inside:{tag:{pattern:/<script[\w\W]*?>|<\/script>/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
+</script>
+
+
+<body>
+
+<div class="cover">
+  <div class="title">
+    <h1>appear<img src="/assets/appear-64.png"/>js</h1>
+  </div>
+</div>
+<div class="content">
+
+<p>Track the visibility of dom elements and fire user defined callbacks as they appear and disappear from view.</p>
+<h2 id="usage">Usage</h2>
+<p>Include appear.js in your page, it has no dependencies.</p>
+<p>Call <code>appear()</code> passing in an object with the following:</p>
+<ul>
+<li><code>init</code> function to run when dom is interactive, but before appear.js has started tracking.</li>
+<li><code>elements</code> <em>required</em> function that returns an htmlcollection of elements to track. The dom will be interactive at this point. Can alternatively be an existing htmlcollection instead of a function.</li>
+<li><code>appear</code> function to run when an element is in view, passed the element that has come into view. If defined then appear.js will track elements until they come into view.</li>
+<li><code>disappear</code> function to run when an element goes out of view, passed the element that has gone out of view. If defined then appear.js will track elements until they go out of view.</li>
+<li><code>reappear</code> if true appear.js will keep tracking elements for successfuive appears and dissappears. Default is false.</li>
+<li><code>bounds</code> increase, in pixels, to the threshold size of the element so it can be &quot;viewable&quot; before it is actually in the viewport.</li>
+<li><code>debounce</code> appear.js tracks elements on browser scroll and resize, for performance reasons this check is &quot;debounced&quot; to only happen once for multiple events, 50ms after the last event ends. You can override this value here.</li>
+<li><code>deltaSpeed</code> in addition to debouncing, appear.js will also check for items during continuous slow scrolling, you can controll how slow the scrolling should be via this value. Default is 50 (pixels).</li>
+<li><code>deltaTimeout</code> after a succesful delta speed check, appear.js will not check for viewable items again until this timeout passes. Default is 500 (ms).</li>
+<li><code>done</code> function called when appear.js is no longer tracking any items and event listeners have been removed.</li>
+</ul>
+<h2 id="example">Example</h2>
+<pre><code class="lang-javascript">appear({
+  init: function init(){
+    console.log(&#39;starting&#39;);
+  },
+  elements: function elements(){
+    // for example, get all elements with the class &quot;lazy&quot;
+    return document.getElementsByClassName(&#39;lazy&#39;);
+  },
+  appear: function appear(el){
+    console.log(&#39;visible&#39;, el);
+  },
+  disappear: function disappear(el){
+    console.log(&#39;no longer visible&#39;, el);
+  },
+  reappear: true
+});</code></pre>
+<p>View <code>test/index.html</code> in a browser for more example usage.</p>
+<p><code>appear()</code> will return an object with the following:</p>
+<ul>
+<li><code>elements</code> the array of elements the appear instance is tracking.</li>
+<li><code>trigger()</code> force a check for viewable elements.</li>
+<li><code>pause()</code> stop tracking elements.</li>
+<li><code>resume()</code> resume tracking elements.</li>
+<li><code>destroy()</code> destroy the appear instance, permanently stop tracking elements.</li>
+</ul>
+<h2 id="download">Download</h2>
+<p>Here.</p>
+<hr>
+<p>appear.js logo designed by <a href="http://thenounproject.com/magicon">Magicon</a> from the <a href="http://thenounproject.com/">Noun Project</a> :: Creative Commons - Attribution (CC BY 3.0)</p>
+
+    </div>
+  <div class="bar"><img src="/assets/magic_hat.png" class="hat"></div>
+  <div class="trick"></div>
+</body>
+</html>
+
