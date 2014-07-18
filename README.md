@@ -40,7 +40,9 @@ appear({
 });
 ```
 
-View `test/index.html` in a browser for more example usage.
+See [creativelive.github.io/appear](http://creativelive.github.io/appear/) for more example usage.
+
+## api
 
 `appear()` will return an object with the following:
 
