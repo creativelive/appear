@@ -24,10 +24,10 @@ Call `appear()` passing in an object with the following:
 ```javascript
 appear({
   init: function init(){
-    console.log('starting');
+    console.log('dom is ready');
   },
   elements: function elements(){
-    // for example, get all elements with the class "lazy"
+    // work with all elements with the class "lazy"
     return document.getElementsByClassName('lazy');
   },
   appear: function appear(el){
@@ -36,6 +36,7 @@ appear({
   disappear: function disappear(el){
     console.log('no longer visible', el);
   },
+  bounds 200,
   reappear: true
 });
 ```
@@ -46,11 +47,10 @@ See [creativelive.github.io/appear](http://creativelive.github.io/appear/) for m
 
 `appear()` will return an object with the following:
 
-- `elements` the array of elements the appear instance is tracking.
 - `trigger()` force a check for viewable elements.
-- `pause()` stop tracking elements.
+- `pause()` temporarily stop tracking elements.
 - `resume()` resume tracking elements.
-- `destroy()` destroy the appear instance, permanently stop tracking elements.
+- `destroy()` permanently stop tracking elements.
 
 
 ## Download
