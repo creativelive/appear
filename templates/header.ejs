@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="shortcut icon" href="https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png" type="image/png">
+<link rel="shortcut icon" href="<%- img.logo64 %>" type="image/png">
 <title>appear.js</title>
 <meta name="description" content="appear.js dom tracking">
 <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT' rel='stylesheet' type='text/css'>
@@ -136,7 +136,6 @@ li {
   line-height: 1.6em;
   list-style-type: circle;
   /*list-style-type: none;*/
-
 }
 
 /*li:before{
@@ -145,7 +144,7 @@ li {
    height: 32px;
    width: 32px;
    margin: 0 12px 0 0;
-   background-image: url(https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png);
+   background-image: url(<%- img.logo64 %>);
    background-size: contain
 }*/
 
@@ -155,14 +154,7 @@ hr {
   border: 1px solid black;
 }
 
-/* http://prismjs.com/download.html?themes=prism-funky&languages=markup+css+clike+javascript */
-/**
- * prism.js Funky theme
- * Based on “Polyfilling the gaps” talk slides http://lea.verou.me/polyfilling-the-gaps/
- * @author Lea Verou
- */
-
-
+/* prismjs styles*/
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
@@ -192,7 +184,7 @@ hr {
 .token.number,
 .token.constant,
 .token.symbol {
-  color: #0cf;
+  color: #747474;
 }
 
 .token.selector,
@@ -231,48 +223,12 @@ hr {
 }
 </style>
 <script>
-<%- appear %>
-</script>
-<script>
-appear((function(){
-  var trick, hat, rabbit = true, count = 0;
-  return {
-  init: function(){
-    trick = document.getElementsByClassName('trick')[0];
-    hat = document.getElementsByClassName('hat')[0];
-  },
-  // function to get all elements to track
-  elements: function elements(){
-    return document.getElementsByClassName('hat');
-  },
-  // function to run when an element is in view
-  appear: function appear(el){
-    trick.style.display = 'none';
-  },
-  disappear: function disappear(el){
-    trick.style.display = 'block';
-    if(++count > 1 && rabbit && Math.floor((Math.random() * 5) + 1) === 1) {
-      hat.setAttribute('src', 'https://cdn.rawgit.com/creativelive/appear/715cd5df6c518493dc406365b0026cc7da92cf78/assets/magic-hat-empty.png');
-      rabbit = false;
-    } else if (!rabbit)  {
-      rabbit = true;
-      hat.setAttribute('src', 'https://cdn.rawgit.com/creativelive/appear/715cd5df6c518493dc406365b0026cc7da92cf78/assets/magic-hat.png');
-    }
-  },
-  deltaSpeed: 100,
-  deltaTimeout: 250,
-  reappear: true,
-  bounds: 0
-  };
-}()));
-</script>
-<% include prismjs %>
+<%- js.appear %>
 
+<% if(page === 'main') { %>
+<% include js/hat %>
+<% include js/prismjs %>
+<% } %>
+
+</script>
 <body>
-
-<div class="cover">
-  <div class="title">
-    <a href="https://github.com/creativelive/appear"><h1>appear<img src="https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png"/>js</h1></a>
-  </div>
-</div>
-<div class="content">
