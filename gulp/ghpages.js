@@ -32,7 +32,7 @@ module.exports = function(gulp, conf) {
 
     var dest = path.join(process.cwd(), '..', 'appear-ghpages');
 
-    fs.writeFileSync(dest, 'index.html'), templates.index(data));
+    fs.writeFileSync(path.join(dest, 'index.html'), templates.index(data));
     data.title = ' - simple example';
     fs.writeFileSync(path.join(dest, 'examples', 'simple', 'index.html'), templates['examples/simple/index'](data));
     data.title = ' - lazyload example';
