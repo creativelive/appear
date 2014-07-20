@@ -16,7 +16,6 @@ module.exports = function(gulp, conf) {
     }
   };
 
-
   gulp.task('ghpages', function(cb) {
 
     var readme = fs.readFileSync(path.join(process.cwd(), 'README.md'), 'utf8');
@@ -36,6 +35,9 @@ module.exports = function(gulp, conf) {
     fs.writeFileSync(path.join(process.cwd(), 'ghpages', 'examples', 'simple', 'index.html'), templates['examples/simple/index'](data));
     data.title = ' - lazyload example';
     fs.writeFileSync(path.join(process.cwd(), 'ghpages', 'examples', 'lazy', 'index.html'), templates['examples/lazy/index'](data));
+
+    gulp.src('ghpages/**/*.*')
+      .pipe(gulp.dest(path.join(process.cwd(), '..', 'appear-ghpages')));
 
     cb();
 
