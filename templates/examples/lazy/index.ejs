@@ -53,9 +53,11 @@ locals.delay = 'data-delay="1000" data-';
 </div>
 
 <h2>appearlazy</h2>
-<p>appearlazy utilizes appear.js to lazy load images that have an "appear" class. It works by switching a
+<p>appearlazy uses appear.js to lazy load images or divs that have an "appear" class. It works by switching a
 <code>data-src</code> attribute into the <code>src</code> as an image is identified as viewable.</p>
 <p>Background images can be configured with a <code>data-bkg</code> attribute.</p>
+<p>When applied to a div, appearlazy will search for elements within it with the right data-attribute
+or if none are found, on the div itself.</p>
 <p>Images can also be lazy loaded on a simple timeout, using the <code>data-delay</code> attribute.</p>
 <pre><code class="language-javascript">
 <%- js.appearlazy %>
