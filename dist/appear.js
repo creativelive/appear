@@ -1,4 +1,4 @@
-/* appear 0.0.7 */
+/* appear 0.0.9 */
 appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
@@ -104,7 +104,7 @@ appear = (function(){
               appeared++;
               
               // call the appear fn
-              if(opts.appear(n)) {
+              if(opts.appear) {
                 opts.appear(n);
               }
               // if not tracking reappears or disappears, need to remove node here
