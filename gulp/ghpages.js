@@ -30,14 +30,13 @@ module.exports = function(gulp, conf) {
 
     var templates = ejstpl({cwd: path.join(process.cwd(), 'templates')});
 
-    fs.writeFileSync(path.join(process.cwd(), 'ghpages', 'index.html'), templates.index(data));
-    data.title = ' - simple example';
-    fs.writeFileSync(path.join(process.cwd(), 'ghpages', 'examples', 'simple', 'index.html'), templates['examples/simple/index'](data));
-    data.title = ' - lazyload example';
-    fs.writeFileSync(path.join(process.cwd(), 'ghpages', 'examples', 'lazy', 'index.html'), templates['examples/lazy/index'](data));
+    var dest = path.join(process.cwd(), '..', 'appear-ghpages');
 
-    gulp.src('ghpages/**/*.*')
-      .pipe(gulp.dest(path.join(process.cwd(), '..', 'appear-ghpages')));
+    fs.writeFileSync(dest, 'index.html'), templates.index(data));
+    data.title = ' - simple example';
+    fs.writeFileSync(path.join(dest, 'examples', 'simple', 'index.html'), templates['examples/simple/index'](data));
+    data.title = ' - lazyload example';
+    fs.writeFileSync(path.join(dest, 'examples', 'lazy', 'index.html'), templates['examples/lazy/index'](data));
 
     cb();
 
