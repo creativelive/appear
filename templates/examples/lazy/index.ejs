@@ -111,7 +111,7 @@ appear({
 </head>
 <body class="example-lazy">
 <%
-locals.message = 'the <img src=" ' + img.logo64 +  '" height=20 /> above lazyloaded after a one second timeout<br>lazyload images example below - scroll down<br>all images from <a href="http://simpledesktops.com">simpledesktops.com</a>';
+locals.message = 'the <img src=" ' + img.logo64 +  '" class="defer-logo" /> above lazyloaded after a one second timeout<br>lazyload images example below - scroll down<br>all images from <a href="http://simpledesktops.com">simpledesktops.com</a>';
 locals.delay = 'data-delay="1000" data-';
 %>
 <% include ../../cover %>
