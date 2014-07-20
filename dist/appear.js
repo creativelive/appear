@@ -1,4 +1,4 @@
-/* appear 0.0.9 */
+/* appear.js 0.0.10 */
 appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};

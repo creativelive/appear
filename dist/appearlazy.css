@@ -1,0 +1,7 @@
+.appear[data-src], .appear[data-bkg], .appear [data-src], .appear [data-bkg] {
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+.appeared[data-src], .appeared[data-bkg], .appeared [data-src], .appeared [data-bkg] {
+  opacity: 1;
+}

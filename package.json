@@ -1,6 +1,6 @@
 {
   "name": "appear",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "utility to run functions when dom elements are visible",
   "kewords": "detect viewable elements dom lazy load scroll ",
   "main": "appear.js",
@@ -18,11 +18,11 @@
     "gulp-strip-debug": "^0.3.0",
     "gulp-uglify": "^0.3.1",
     "gulp-eslint": "^0.1.8",
-    "gulp-header": "^1.0.5",
     "gulp-replace": "^0.4.0",
     "marked": "^0.2.9",
     "ejstpl": "^3.3.0",
-    "gulp-size": "^0.4.0"
+    "gulp-size": "^0.4.0",
+    "gulp-tap": "^0.1.1"
   },
   "dependencies": {
     "gulp-rename": "^1.2.0"
