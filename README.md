@@ -34,8 +34,8 @@ appear({
     console.log('dom is ready');
   },
   elements: function elements(){
-    // work with all elements with the class "lazy"
-    return document.getElementsByClassName('lazy');
+    // work with all elements with the class "track"
+    return document.getElementsByClassName('track');
   },
   appear: function appear(el){
     console.log('visible', el);
