@@ -2,6 +2,11 @@
 
 Track the visibility of dom elements and fire user defined callbacks as they appear and disappear from view.
 
+## Demos
+
+- [Simple test page](http://creativelive.github.io/appear/examples/simple/)
+- [Lazy loading images](http://creativelive.github.io/appear/examples/lazy/)
+
 ## Usage
 
 Include appear.js in your page, it has no dependencies.
@@ -40,8 +45,6 @@ appear({
   reappear: true
 });
 ```
-
-See [creativelive.github.io/appear](http://creativelive.github.io/appear/) for more example usage.
 
 ## api
 
