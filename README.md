@@ -1,11 +1,13 @@
 # ![appear](https://raw.githubusercontent.com/creativelive/appear/master/assets/appear-64.png) appear
 
-Track the visibility of dom elements and fire user defined callbacks as they appear and disappear from view.
+> Track the visibility of dom elements and fire user defined callbacks as they appear and disappear.
 
 ## Demos
 
-- [Simple test page](http://creativelive.github.io/appear/examples/simple/)
-- [Lazy loading images](http://creativelive.github.io/appear/examples/lazy/)
+- [appear.js simple test page](http://creativelive.github.io/appear/examples/simple/)
+- [appearlazy](http://creativelive.github.io/appear/examples/lazy/) - a full fledged lazy image loader that uses appear.js
+
+Be sure to view the documentation on the [project page](http://creativelive.github.io/appear/)
 
 ## Usage
 
