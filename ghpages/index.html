@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <link rel="shortcut icon" href="https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png" type="image/png">
-<title>appear.js</title>
+<title>appear.js undefined</title>
 <meta name="description" content="appear.js dom tracking">
 <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT' rel='stylesheet' type='text/css'>
 <style>
 /*  [normalize css](https://github.com/necolas/normalize.css) */
 article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block}audio,canvas,video{display:inline-block;*display:inline;*zoom:1;}audio:not([controls]){display:none}[hidden]{display:none}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}html,button,input,select,textarea{font-family:sans-serif}body{margin:0}a:focus{outline:thin dotted}a:hover,a:active{outline:0}h1{font-size:2em;margin:0.67em 0;}h2{font-size:1.5em;margin:0.83em 0;}h3{font-size:1.17em;margin:1em 0;}h4{font-size:1em;margin:1.33em 0;}h5{font-size:0.83em;margin:1.67em 0;}h6{font-size:0.75em;margin:2.33em 0;}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}blockquote{margin:1em 40px}dfn{font-style:italic}mark{background:#ff0;color:#000;}p,pre{margin:1em 0}pre,code,kbd,samp{font-family:monospace,serif;_font-family:'courier new',monospace;font-size:1em;}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word;}q{quotes:none}q:before,q:after{content:'';content:none;}small{font-size:75%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em}sub{bottom:-0.25em}dl,menu,ol,ul{margin:1em 0}dd{margin:0 0 0 40px}menu,ol,ul{padding:0 0 0 40px}nav ul,nav ol{list-style:none;list-style-image:none;}img{border:0;-ms-interpolation-mode:bicubic;}svg:not(:root){overflow:hidden}figure{margin:0}form{margin:0}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;white-space:normal;*margin-left:-7px;}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle;}button,input{line-height:normal;}button,input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button;*overflow:visible;}button[disabled],input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;*height:13px;*width:13px;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-decoration,input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}
+
 
 @media screen and (device-aspect-ratio: 2/3), screen and (device-aspect-ratio: 40/71) {
   h1 {
@@ -51,6 +52,15 @@ h1 {
   font-size: 6em;
 }
 
+#message {
+  text-align: center;
+  display: block;
+}
+
+.center {
+  text-align: center;
+}
+
 h1 img {
   height: 32px;
 }
@@ -65,11 +75,20 @@ a {
 
 h2 {
   font-size: 70px;
-  width:95%;
   border-bottom: 2px solid black;
+  width:95%;
   padding: 0 10px;
   margin-top: 80px;
   margin-right: 40px
+}
+
+h3 {
+  font-size: 40px;
+  text-align: center;
+}
+
+h3.intro {
+  margin: 100px 0 100px 0;
 }
 
 .content {
@@ -104,12 +123,12 @@ code {
 }
 
 .hat {
-    margin-bottom:-5px;
-    width:100%;
-    max-width:696px;
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
+  margin-bottom:-5px;
+  width:100%;
+  max-width:696px;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .trick {
@@ -152,6 +171,41 @@ hr {
   margin-top: 50px;
   margin-right: 1.8%;
   border: 1px solid black;
+}
+
+.example-lazy .content img {
+    height: 391px;
+    width: 625px;
+    display: block;
+    margin: 5px auto;
+}
+.example-lazy .content .small {
+    width: 650px;
+    margin: 0 auto;
+}
+.example-lazy .content .small img {
+    display: inline;
+    height: 130px;
+    width: 208px;
+}
+.example-lazy .content .footer {
+    margin-bottom: 80px;
+}
+.example-lazy .content .done {
+    position: fixed;
+    margin: 0;
+    padding: 10px 5px 5px 5px;
+    bottom: 0px;
+    height: 40px;
+    display: block;
+    width: 100%;
+    border-top: 2px solid black;
+    background: #fff;
+}
+
+.content-middle {
+    height: 1600px;
+    display: block;
 }
 
 /* prismjs styles*/
@@ -208,7 +262,6 @@ hr {
   font-weight: 800;
 }
 
-
 .token.regex,
 .token.important {
   color: orange;
@@ -221,12 +274,12 @@ hr {
 .token.entity {
   cursor: help;
 }
+
 </style>
+
 <script>
-/* appear 0.0.6 */
-appear=function(){"use strict";function e(){var e=window.scrollY;null!=n&&(r.velocity=e-n,r.delta=r.velocity>=0?r.velocity:-1*r.velocity),n=e,i&&clearTimeout(i),i=setTimeout(function(){n=null},30)}function t(e,t){var n=e.getBoundingClientRect();return n.top+n.height>=0&&n.left+n.width>=0&&n.bottom-n.height<=(window.innerHeight||document.documentElement.clientHeight)+t&&n.right-n.width<=(window.innerWidth||document.documentElement.clientWidth)+t}var n=null,i=0,r={};return addEventListener("scroll",e),function(e){return function(){function e(e,t){return function(){var n=this,i=arguments;clearTimeout(l),l=setTimeout(function(){e.apply(n,i)},t)}}function n(){r.delta<g.delta.speed&&(p||(p=!0,u(),setTimeout(function(){p=!1},g.delta.timeout))),e(function(){u()},g.debounce)()}function i(){u(),addEventListener("scroll",n),addEventListener("resize",n)}function o(){f=null,l&&clearTimeout(l),a()}function a(){removeEventListener("scroll",n),removeEventListener("resize",n)}function u(){f.forEach(function(e,n){e&&t(e,g.bounds)?m[n]&&(m[n]=!1,v++,g.appear(e)&&g.appear(e),g.disappear||g.reappear||(f[n]=null)):(m[n]===!1&&(g.disappear&&g.disappear(e),h++,g.reappear||(f[n]=null)),m[n]=!0)}),g.reappear||g.appear&&(!g.appear||v!==c)||g.disappear&&(!g.disappear||h!==c)||(a(),g.done&&g.done())}function d(){if(!s){s=!0,g.init&&g.init();var e;if(e="function"==typeof g.elements?g.elements():g.elements){c=e.length;for(var t=0;c>t;t+=1)f.push(e[t]),m.push(!0);i()}}}var c,l,p,s=!1,f=[],m=[],v=0,h=0,g={};return function(e){return e=e||{},g={init:e.init,elements:e.elements,appear:e.appear,disappear:e.disappear,done:e.done,reappear:e.reappear,bounds:e.bounds||0,debounce:e.debounce||50,delta:{speed:e.deltaSpeed||50,timeout:e.deltaTimeout||500}},addEventListener("DOMContentLoaded",d),("interactive"===document.readyState||"complete"===document.readyState)&&d(),{elements:f,trigger:function(){u()},pause:function(){a()},resume:function(){i()},destroy:function(){o()}}}}()(e)}}();
-
-
+/* appear 0.0.7 */
+appear=function(){"use strict";function e(){var e=window.scrollY;null!=n&&(r.velocity=e-n,r.delta=r.velocity>=0?r.velocity:-1*r.velocity),n=e,i&&clearTimeout(i),i=setTimeout(function(){n=null},30)}function t(e,t){var n=e.getBoundingClientRect();return n.top+n.height>=0&&n.left+n.width>=0&&n.bottom-n.height<=(window.innerHeight||document.documentElement.clientHeight)+t&&n.right-n.width<=(window.innerWidth||document.documentElement.clientWidth)+t}var n=null,i=0,r={};return addEventListener("scroll",e),function(e){return function(){function e(e,t){return function(){var n=this,i=arguments;clearTimeout(p),p=setTimeout(function(){e.apply(n,i)},t)}}function n(){r.delta<y.delta.speed&&(l||(l=!0,u(),setTimeout(function(){l=!1},y.delta.timeout))),e(function(){u()},y.debounce)()}function i(){u(),addEventListener("scroll",n),addEventListener("resize",n)}function o(){m=[],p&&clearTimeout(p),a()}function a(){removeEventListener("scroll",n),removeEventListener("resize",n)}function u(){s||(m.forEach(function(e,n){e&&t(e,y.bounds)?v[n]&&(v[n]=!1,h++,y.appear(e)&&y.appear(e),y.disappear||y.reappear||(m[n]=null)):(v[n]===!1&&(y.disappear&&y.disappear(e),g++,y.reappear||(m[n]=null)),v[n]=!0)}),y.reappear||y.appear&&(!y.appear||h!==c)||y.disappear&&(!y.disappear||g!==c)||(s=!0,a(),y.done&&y.done()))}function d(){if(!f){f=!0,y.init&&y.init();var e;if(e="function"==typeof y.elements?y.elements():y.elements){c=e.length;for(var t=0;c>t;t+=1)m.push(e[t]),v.push(!0);i()}}}var c,p,l,s,f=!1,m=[],v=[],h=0,g=0,y={};return function(e){return e=e||{},y={init:e.init,elements:e.elements,appear:e.appear,disappear:e.disappear,done:e.done,reappear:e.reappear,bounds:e.bounds||0,debounce:e.debounce||50,delta:{speed:e.deltaSpeed||50,timeout:e.deltaTimeout||500}},addEventListener("DOMContentLoaded",d),("interactive"===document.readyState||"complete"===document.readyState)&&d(),{trigger:function(){u()},pause:function(){a()},resume:function(){i()},destroy:function(){o()}}}}()(e)}}();
 appear((function(){
   var trick, hat, rabbit = true, count = 0;
   return {
@@ -268,14 +321,13 @@ Prism.languages.clike={comment:{pattern:/(^|[^\\])(\/\*[\w\W]*?\*\/|(^|[^:])\/\/
 Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|function|get|if|implements|import|in|instanceof|interface|let|new|null|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/g,number:/\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee]-?\d+)?|NaN|-?Infinity)\b/g});Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}});Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/<script[\w\W]*?>[\w\W]*?<\/script>/ig,inside:{tag:{pattern:/<script[\w\W]*?>|<\/script>/ig,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript}}});;
 Prism.languages.bash=Prism.languages.extend("clike",{comment:{pattern:/(^|[^"{\\])(#.*?(\r?\n|$))/g,lookbehind:!0},string:{pattern:/("|')(\\?[\s\S])*?\1/g,inside:{property:/\$([a-zA-Z0-9_#\?\-\*!@]+|\{[^\}]+\})/g}},keyword:/\b(if|then|else|elif|fi|for|break|continue|while|in|case|function|select|do|done|until|echo|exit|return|set|declare)\b/g});Prism.languages.insertBefore("bash","keyword",{property:/\$([a-zA-Z0-9_#\?\-\*!@]+|\{[^}]+\})/g});Prism.languages.insertBefore("bash","comment",{important:/(^#!\s*\/bin\/bash)|(^#!\s*\/bin\/sh)/g});;
 
-
-
 </script>
+</head>
 <body>
-
 <div class="cover">
   <div class="title">
-    <a href="https://github.com/creativelive/appear"><h1>appear<img src="https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png"/>js</h1></a>
+    <a href="https://github.com/creativelive/appear"><h1>appear<img class="appear" src="https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png"/>js</h1></a>
+    <span id="message"></span>
   </div>
 </div>
 
@@ -332,7 +384,5 @@ Prism.languages.bash=Prism.languages.extend("clike",{comment:{pattern:/(^|[^"{\\
 
 <div class="bar"><img src="https://cdn.rawgit.com/creativelive/appear/715cd5df6c518493dc406365b0026cc7da92cf78/assets/magic-hat.png" class="hat"></div>
 <div class="trick"></div>
-
 </body>
 </html>
-

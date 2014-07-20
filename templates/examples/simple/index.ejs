@@ -1,33 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>appear.js</title>
-<style>
-html, body {
-    margin: 10px;
-    padding: 0;
-}
-h1, h2, h3 {
-    margin: 5px;
-}
-.content {
-    font-size: 100px;
-    font-weight: bold;
-}
-.content-top {
-    height: 1600px;
-    display: block;
-}
-.content-bottom {
-    height: 1600px;
-    display: block;
-}
-.footer {
-    height: 200px;
-}
-</style>
-<script src="/lib/appear.js"></script>
+<% include ../../header %>
 <script>
+<%- js.appear %>
 appear({
   // function to get all elements to track
   elements: function elements(){
@@ -62,14 +35,14 @@ appear({
   }
 });
 
-(function(){
+(function (){
   var header = appear(
   (function(){
       var count = 0;
       return {
         // function to get all elements to track
         elements: function elements(){
-          return document.getElementsByTagName('H1');
+          return [document.getElementById('message')];
         },
         // function to run when an element is in view
         appear: function appear(el){
@@ -77,9 +50,9 @@ appear({
           count++;
           if(count >= 7) {
             header.destroy();
-            el.innerHTML = 'appear test page - ok that\'s enough';
+            el.innerHTML = 'ok that\'s enough';
           } else if(count > 1) {
-            el.innerHTML = 'appear test page - reappeared ' + (count -1) + ' time' + (count === 2 ? '' : 's');
+            el.innerHTML = 'reappeared ' + (count - 1) + ' time' + (count === 2 ? '' : 's');
           }
         },
         // function to run when an element goes out of view
@@ -91,14 +64,14 @@ appear({
   }())
   );
 }());
-
 </script>
 </head>
 <body>
-
-<h1>appear test page</h1>
-<div class="content content-top">scroll down</div>
-<div class="content content-bottom"><h3 class="encourage"></h3></div>
+<% locals.message = 'simple test page - scroll down'; %>
+<% include ../../cover %>
+<div class="content center">
+<div class="content content-middle"><h3 class="encourage"></h3></div>
 <div class="content footer"></div>
+</div>
 </body>
 </html>

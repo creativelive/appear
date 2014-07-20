@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="shortcut icon" href="https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png" type="image/png">
+<title>appear.js  - lazyload example</title>
+<meta name="description" content="appear.js dom tracking">
+<link href='http://fonts.googleapis.com/css?family=Old+Standard+TT' rel='stylesheet' type='text/css'>
+<style>
+/*  [normalize css](https://github.com/necolas/normalize.css) */
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block}audio,canvas,video{display:inline-block;*display:inline;*zoom:1;}audio:not([controls]){display:none}[hidden]{display:none}html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}html,button,input,select,textarea{font-family:sans-serif}body{margin:0}a:focus{outline:thin dotted}a:hover,a:active{outline:0}h1{font-size:2em;margin:0.67em 0;}h2{font-size:1.5em;margin:0.83em 0;}h3{font-size:1.17em;margin:1em 0;}h4{font-size:1em;margin:1.33em 0;}h5{font-size:0.83em;margin:1.67em 0;}h6{font-size:0.75em;margin:2.33em 0;}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}blockquote{margin:1em 40px}dfn{font-style:italic}mark{background:#ff0;color:#000;}p,pre{margin:1em 0}pre,code,kbd,samp{font-family:monospace,serif;_font-family:'courier new',monospace;font-size:1em;}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word;}q{quotes:none}q:before,q:after{content:'';content:none;}small{font-size:75%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em}sub{bottom:-0.25em}dl,menu,ol,ul{margin:1em 0}dd{margin:0 0 0 40px}menu,ol,ul{padding:0 0 0 40px}nav ul,nav ol{list-style:none;list-style-image:none;}img{border:0;-ms-interpolation-mode:bicubic;}svg:not(:root){overflow:hidden}figure{margin:0}form{margin:0}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;white-space:normal;*margin-left:-7px;}button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle;}button,input{line-height:normal;}button,input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button;*overflow:visible;}button[disabled],input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;*height:13px;*width:13px;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-decoration,input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}
+
+
+@media screen and (device-aspect-ratio: 2/3), screen and (device-aspect-ratio: 40/71) {
+  h1 {
+    font-size: 2.4em !important;
+  }
+  body {
+    font-size: 3em;
+  }
+}
+
+/* entire viewport cover div with vertical/horizontal centered title */
+html, body {
+  height: 100%;
+  background-color: #FFF;
+}
+.cover {
+  height: 100%;
+}
+.title {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;  height: 250px;
+}
+
+html {
+  font-family:"Helvetica Neue",Helvetica,Verdana,sans-serif;
+  color: #000;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family:"Old Standard TT";
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 5px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 6em;
+}
+
+#message {
+  text-align: center;
+  display: block;
+}
+
+.center {
+  text-align: center;
+}
+
+h1 img {
+  height: 32px;
+}
+
+a {
+  color: #000;
+}
+
+.title a {
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 70px;
+  border-bottom: 2px solid black;
+  width:95%;
+  padding: 0 10px;
+  margin-top: 80px;
+  margin-right: 40px
+}
+
+h3 {
+  font-size: 40px;
+  text-align: center;
+}
+
+h3.intro {
+  margin: 100px 0 100px 0;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 200px 10px 100px 10px;
+}
+
+pre code {
+  font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+  display: block;
+  padding: 9.5px;
+  line-height: 1.428571429;
+  white-space: pre;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+code {
+  font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+  padding: 4px;
+  line-height: 1.428571429;
+  white-space: pre;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+.hat {
+  margin-bottom:-5px;
+  width:100%;
+  max-width:696px;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trick {
+  bottom:0;
+  left:0;
+  width: 100%;
+  position:fixed;
+  height: 40px;
+  background-color: black;
+}
+
+.bar {
+  height: 40px;
+  background-color: black;
+}
+
+ul {
+  margin:0 0 0 20px;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  line-height: 1.6em;
+  list-style-type: circle;
+  /*list-style-type: none;*/
+}
+
+/*li:before{
+   content: '';
+   display: inline-block;
+   height: 32px;
+   width: 32px;
+   margin: 0 12px 0 0;
+   background-image: url(https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png);
+   background-size: contain
+}*/
+
+hr {
+  margin-top: 50px;
+  margin-right: 1.8%;
+  border: 1px solid black;
+}
+
+.example-lazy .content img {
+    height: 391px;
+    width: 625px;
+    display: block;
+    margin: 5px auto;
+}
+.example-lazy .content .small {
+    width: 650px;
+    margin: 0 auto;
+}
+.example-lazy .content .small img {
+    display: inline;
+    height: 130px;
+    width: 208px;
+}
+.example-lazy .content .footer {
+    margin-bottom: 80px;
+}
+.example-lazy .content .done {
+    position: fixed;
+    margin: 0;
+    padding: 10px 5px 5px 5px;
+    bottom: 0px;
+    height: 40px;
+    display: block;
+    width: 100%;
+    border-top: 2px solid black;
+    background: #fff;
+}
+
+.content-middle {
+    height: 1600px;
+    display: block;
+}
+
+/* prismjs styles*/
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .2em;
+  border-radius: .3em;
+  box-shadow: none;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #aaa;
+}
+
+.token.punctuation {
+  color: #999;
+}
+
+.namespace {
+  opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: #747474;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.builtin {
+  color: #747474;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.toke.variable {
+  color: #aaa;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  font-weight: 800;
+}
+
+.token.regex,
+.token.important {
+  color: orange;
+}
+
+.token.important {
+  font-weight: bold;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+</style>
+
+<style>
+  .appear[data-src], .appear[data-bkg], .appear [data-src], .appear [data-bkg] {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+  }
+  .appeared[data-src], .appeared[data-bkg], .appeared [data-src], .appeared [data-bkg] {
+    opacity: 1;
+  }
+</style>
+<script>
+appear = (function(){
+  'use strict';
+  var scrollLastPos = null, scrollTimer = 0, scroll = {};
+
+  function track(){
+    var newPos = window.scrollY;
+    if ( scrollLastPos != null ){ // && newPos < maxScroll
+      scroll.velocity = newPos - scrollLastPos;
+      scroll.delta = (scroll.velocity >= 0) ? scroll.velocity : (-1 * scroll.velocity);
+      console.log('velocity:', scroll.velocity, 'delta:', scroll.delta);
+    }
+    scrollLastPos = newPos;
+    if(scrollTimer){
+      clearTimeout(scrollTimer);
+    }
+    scrollTimer = setTimeout(function(){
+      scrollLastPos = null;
+    }, 30);
+  }
+  addEventListener('scroll', track);
+
+  // determine if a given element (plus an additional "bounds" area around it) is in the viewport
+  function viewable(el, bounds){
+    var rect = el.getBoundingClientRect();
+    return (
+      (rect.top + rect.height) >= 0 &&
+      (rect.left + rect.width) >= 0 &&
+      (rect.bottom - rect.height) <= ( (window.innerHeight || document.documentElement.clientHeight) + bounds) &&
+      (rect.right - rect.width) <= ( (window.innerWidth || document.documentElement.clientWidth) + bounds)
+    );
+  }
+
+  return function(obj){
+
+    return (function(obj){
+      var initd = false, elements = [], elementsLength, reappear = [],
+        appeared = 0, disappeared = 0, timer, deltaSet, opts = {}, done;
+
+      // handle debouncing a function for better performance on scroll
+      function debounce(fn, delay) {
+        return function () {
+          var self = this, args = arguments;
+          clearTimeout(timer);
+          console.log('debounce()');
+          timer = setTimeout(function () {
+            fn.apply(self, args);
+          }, delay);
+        };
+      }
+
+      // called on scroll and resize event, so debounce the actual function that does
+      // the heavy work of determining if an item is viewable and then "appearing" it
+      function checkAppear() {
+        if(scroll.delta < opts.delta.speed) {
+          if(!deltaSet) {
+            deltaSet = true;
+            doCheckAppear();
+            setTimeout(function(){
+              deltaSet = false;
+            }, opts.delta.timeout);
+          }
+        }
+        (debounce(function() {
+          doCheckAppear();
+        }, opts.debounce)());
+      }
+
+      function begin() {
+        // initial appear check before any scroll or resize event
+        doCheckAppear();
+
+        // add relevant listeners
+        addEventListener('scroll', checkAppear);
+        addEventListener('resize', checkAppear);
+      }
+
+      function end() {
+        elements = [];
+        if(timer) {
+          clearTimeout(timer);
+        }
+        removeListeners();
+      }
+
+      function removeListeners() {
+        console.log('remove listeners');
+        removeEventListener('scroll', checkAppear);
+        removeEventListener('resize', checkAppear);
+      }
+
+      function doCheckAppear() {
+        if(done) {
+          return;
+        }
+        console.log('doCheckReappear()');
+        elements.forEach(function(n, i){
+          if(n && viewable(n, opts.bounds)) {
+            // only act if the element is eligible to reappear
+            if(reappear[i]) {
+              // mark this element as not eligible to appear
+              reappear[i] = false;
+              // increment the count of appeared items
+              appeared++;
+              console.log('appears:', appeared);
+              // call the appear fn
+              if(opts.appear(n)) {
+                opts.appear(n);
+              }
+              // if not tracking reappears or disappears, need to remove node here
+              if(!opts.disappear && !opts.reappear) {
+                // stop tracking this node, which is now viewable
+                elements[i] = null;
+              }
+            }
+          } else {
+            if(reappear[i] === false) {
+              if(opts.disappear) {
+                opts.disappear(n);
+              }
+              // increment the dissappeared count
+              disappeared++;
+              console.log('disappears:', disappeared);
+              // if not tracking reappears, need to remove node here
+              if(!opts.reappear) {
+                // stop tracking this node, which is now viewable
+                elements[i] = null;
+              }
+            }
+            // element is out of view and eligible to be appeared again
+            reappear[i] = true;
+          }
+        });
+
+        // remove listeners if all items have (re)appeared
+        if(!opts.reappear && (!opts.appear || opts.appear && appeared === elementsLength) && (!opts.disappear || opts.disappear && disappeared === elementsLength)) {
+          // ensure done is only called once (could be called from a trailing debounce/throttle)
+          done = true;
+          removeListeners();
+          // all items have appeared, so call the done fn
+          if(opts.done){
+            opts.done();
+          }
+        }
+      }
+
+      function init() {
+        // make sure we only init once
+        if(initd) {
+          return;
+        }
+        initd = true;
+
+        // call the obj init fn
+        if(opts.init) {
+          opts.init();
+        }
+        // get the elements to work with
+        var els;
+        if(typeof opts.elements === 'function') {
+          els = opts.elements();
+        } else {
+          els = opts.elements;
+        }
+        if(els) {
+          //  put elements into an array object to work with
+          elementsLength = els.length;
+          for(var i = 0; i < elementsLength; i += 1) {
+            elements.push(els[i]);
+            reappear.push(true);
+          }
+          begin();
+        }
+      }
+
+      return function(obj) {
+        obj = obj || {};
+
+        // assign the fn to execute when a node is visible
+        opts = {
+          // a function to be run when the dom is ready (allows for any setup work)
+          init: obj.init,
+          // either an array of elements or a function that will return an htmlCollection
+          elements: obj.elements,
+          // function to call when an element is "viewable", will be passed the element to work with
+          appear: obj.appear,
+          // function to call when an element is no longer "viewable", will be passed the element to work with
+          disappear: obj.disappear,
+          // function to call when all the elements have "appeared"
+          done: obj.done,
+          // keep tracking the elements
+          reappear: obj.reappear,
+          // the extra border around an element to make it viewable outside of the true viewport
+          bounds: obj.bounds || 0,
+          // the debounce timeout
+          debounce: obj.debounce || 50,
+          // appear.js will also check for items on continuous slow scrolling
+          // you can controll how slow the scrolling should be  (deltaSpeed)
+          // and when it will check again (deltaTimeout) after it has inspected the dom/viewport;
+          delta: {
+            speed: obj.deltaSpeed || 50,
+            timeout: obj.deltaTimeout || 500
+          }
+        };
+
+        // add an event listener to init when dom is ready
+        addEventListener('DOMContentLoaded', init);
+        // call init if document was already ready and we missed the event
+        if (document.readyState === 'interactive' || document.readyState === 'complete' ) {
+          init();
+        }
+
+        return {
+          // manually fire check for visibility of tracked elements
+          trigger: function trigger(){
+            doCheckAppear();
+          },
+          // pause tracking of elements
+          pause: function pause(){
+            removeListeners();
+          },
+          // resume tracking of elements after a pause
+          resume: function resume(){
+            begin();
+          },
+          // provide a means to stop monitoring all elements
+          destroy: function destroy() {
+            end();
+          }
+        };
+
+      };
+    }()(obj));
+  };
+}());
+
+appear(
+  (function() {
+    'use strict';
+    var nodes = [];
+
+    // set the image src or background attribute
+    function doReveal(el) {
+      // TODO consider removing the classes via timeout after transition
+      // is finished to allow existing styles to take over
+      var src = el.getAttribute('data-src');
+      if(src) {
+        el.setAttribute('src', src);
+        el.classList.add('appeared');
+        return;
+      }
+      src = el.getAttribute('data-bkg');
+      if(src) {
+        el.style.backgroundImage = 'url("' + src + '")';
+        el.classList.add('appeared');
+        return;
+      }
+    }
+
+    // find what element to work with, as we support containers of images
+    function reveal(el){
+      if(el.hasChildNodes()) {
+        // dealing with a container try and find children
+        var els = el.querySelectorAll('[data-src], [data-bkg]');
+        var elsl = els.length;
+        if(elsl === 0) {
+          // node has children, but none have the attributes, try and reveal the
+          // the node itself (use case: div with a background)
+          doReveal(el);
+        } else {
+          for(var j = 0; j < elsl; j++) {
+            doReveal(els[j]);
+          }
+        }
+      } else {
+        doReveal(el);
+      }
+    }
+
+    //
+    function delayAppear(el, delay) {
+      setTimeout(function(){
+        reveal(el);
+      }, delay);
+    }
+
+    return {
+      // function executed when dom is interactive
+      init: function init() {
+        // grab the elements to work with
+        var els = document.getElementsByClassName('appear');
+        var elsl = els.length;
+        //  put html elements into an array object to work with
+        for(var i = 0; i < elsl; i += 1) {
+          // delay appears must have the appear class on them directly
+          var delay = els[i].getAttribute('data-delay');
+          if(delay) {
+            delayAppear(els[i], delay);
+          } else {
+            nodes.push(els[i]);
+          }
+        }
+      },
+      elements: nodes,
+      // function to run when an element is determined to be in view
+      appear: reveal,
+      bounds: 200,
+
+      // called when all nodes are visible
+      done: function done(){
+        console.log('all done');
+      }
+    };
+
+  }())
+);
+</script>
+<script>
+appear({
+  // function to get all elements to track
+  elements: function elements(){
+    return document.getElementsByClassName('footer');
+  },
+  // function to run when an element is in view
+  appear: function appear(el){
+    console.log('footer is visible');
+    el.innerHTML = '<h3 class="done">All images from <a href="http://simpledesktops.com">Simple Desktops</a></h3>';
+  },
+  // called when all nodes are visible
+  done: function done(){
+    console.log('footer done');
+  }
+});
+</script>
+</head>
+<body class="example-lazy">
+
+<div class="cover">
+  <div class="title">
+    <a href="https://github.com/creativelive/appear"><h1>appear<img class="appear" data-delay="1000" data-src="https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png"/>js</h1></a>
+    <span id="message">the <img src=" https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png" height=20 /> above lazyloaded after a one second timeout<br>lazyload images example below - scroll down<br>all images from <a href="http://simpledesktops.com">simpledesktops.com</a></span>
+  </div>
+</div>
+
+
+<div class="content">
+<!--
+<div class="appear" data-delay="1000">
+
+</div> -->
+<h3 class="intro">these images lazy loaded individually</h3>
+<img class="appear" data-src="img/ChristmasJumperPaper.png" />
+<img class="appear" data-src="img/cubechaos2.png" />
+<img class="appear" data-src="img/Figure8.png" />
+<img class="appear" data-src="img/flowerWhite.png" />
+<img class="appear" data-src="img/Hole.png" />
+<img class="appear" data-src="img/ineedsleep.png" />
+<img class="appear" data-src="img/Intersection.png" />
+<img class="appear" data-src="img/multilayeredeye.png" />
+<img class="appear" data-src="img/road.png" />
+<img class="appear" data-src="img/see-ya-there.png" />
+<img class="appear" data-src="img/Simple_Shapes_11.png" />
+<img class="appear" data-src="img/summer_2.png" />
+<img class="appear" data-src="img/void.png" />
+<img class="appear" data-src="img/wallpaper.png" />
+<img class="appear" data-src="img/Western_Wallpaper_No_Grit.png" />
+
+<h3 class="intro">the images in this parent container are all loaded at once</h3>
+<div class="appear small">
+<img data-src="img/ChristmasJumperPaper.png" />
+<img data-src="img/cubechaos2.png" />
+<img data-src="img/Figure8.png" />
+<img data-src="img/flowerWhite.png" />
+<img data-src="img/Hole.png" />
+<img data-src="img/ineedsleep.png" />
+<img data-src="img/Intersection.png" />
+<img data-src="img/multilayeredeye.png" />
+<img data-src="img/road.png" />
+<img data-src="img/see-ya-there.png" />
+<img data-src="img/Simple_Shapes_11.png" />
+<img data-src="img/summer_2.png" />
+<img data-src="img/void.png" />
+<img data-src="img/wallpaper.png" />
+<img data-src="img/Western_Wallpaper_No_Grit.png" />
+</div>
+
+</div>
+</body>
+</html>

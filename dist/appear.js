@@ -1,4 +1,4 @@
-/* appear 0.0.6 */
+/* appear 0.0.7 */
 appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
@@ -22,7 +22,6 @@ appear = (function(){
 
   // determine if a given element (plus an additional "bounds" area around it) is in the viewport
   function viewable(el, bounds){
-    
     var rect = el.getBoundingClientRect();
     return (
       (rect.top + rect.height) >= 0 &&
@@ -36,7 +35,7 @@ appear = (function(){
 
     return (function(obj){
       var initd = false, elements = [], elementsLength, reappear = [],
-        appeared = 0, disappeared = 0, timer, deltaSet, opts = {};
+        appeared = 0, disappeared = 0, timer, deltaSet, opts = {}, done;
 
       // handle debouncing a function for better performance on scroll
       function debounce(fn, delay) {
@@ -77,7 +76,7 @@ appear = (function(){
       }
 
       function end() {
-        elements = null;
+        elements = [];
         if(timer) {
           clearTimeout(timer);
         }
@@ -91,6 +90,9 @@ appear = (function(){
       }
 
       function doCheckAppear() {
+        if(done) {
+          return;
+        }
         
         elements.forEach(function(n, i){
           if(n && viewable(n, opts.bounds)) {
@@ -111,7 +113,6 @@ appear = (function(){
                 elements[i] = null;
               }
             }
-
           } else {
             if(reappear[i] === false) {
               if(opts.disappear) {
@@ -133,6 +134,8 @@ appear = (function(){
 
         // remove listeners if all items have (re)appeared
         if(!opts.reappear && (!opts.appear || opts.appear && appeared === elementsLength) && (!opts.disappear || opts.disappear && disappeared === elementsLength)) {
+          // ensure done is only called once (could be called from a trailing debounce/throttle)
+          done = true;
           removeListeners();
           // all items have appeared, so call the done fn
           if(opts.done){
@@ -208,8 +211,6 @@ appear = (function(){
         }
 
         return {
-          // the array of elements being tracked
-          elements: elements,
           // manually fire check for visibility of tracked elements
           trigger: function trigger(){
             doCheckAppear();

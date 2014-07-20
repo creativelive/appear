@@ -1,4 +1,11 @@
 <% include header %>
+<script>
+<%- js.appearmin %>
+<% include js/hat %>
+<% include js/prismjs %>
+</script>
+</head>
+<body>
 <% include cover %>
 <div class="content">
 <%- readme %>
@@ -6,5 +13,5 @@
 
 <div class="bar"><img src="<%- img.hat %>" class="hat"></div>
 <div class="trick"></div>
-
-<% include footer %>
+</body>
+</html>

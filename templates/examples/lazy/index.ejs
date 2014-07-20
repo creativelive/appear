@@ -1,0 +1,162 @@
+<% include ../../header %>
+<style>
+  .appear[data-src], .appear[data-bkg], .appear [data-src], .appear [data-bkg] {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+  }
+  .appeared[data-src], .appeared[data-bkg], .appeared [data-src], .appeared [data-bkg] {
+    opacity: 1;
+  }
+</style>
+<script>
+<%- js.appear %>
+appear(
+  (function() {
+    'use strict';
+    var nodes = [];
+
+    // set the image src or background attribute
+    function doReveal(el) {
+      // TODO consider removing the classes via timeout after transition
+      // is finished to allow existing styles to take over
+      var src = el.getAttribute('data-src');
+      if(src) {
+        el.setAttribute('src', src);
+        el.classList.add('appeared');
+        return;
+      }
+      src = el.getAttribute('data-bkg');
+      if(src) {
+        el.style.backgroundImage = 'url("' + src + '")';
+        el.classList.add('appeared');
+        return;
+      }
+    }
+
+    // find what element to work with, as we support containers of images
+    function reveal(el){
+      if(el.hasChildNodes()) {
+        // dealing with a container try and find children
+        var els = el.querySelectorAll('[data-src], [data-bkg]');
+        var elsl = els.length;
+        if(elsl === 0) {
+          // node has children, but none have the attributes, try and reveal the
+          // the node itself (use case: div with a background)
+          doReveal(el);
+        } else {
+          for(var j = 0; j < elsl; j++) {
+            doReveal(els[j]);
+          }
+        }
+      } else {
+        doReveal(el);
+      }
+    }
+
+    //
+    function delayAppear(el, delay) {
+      setTimeout(function(){
+        reveal(el);
+      }, delay);
+    }
+
+    return {
+      // function executed when dom is interactive
+      init: function init() {
+        // grab the elements to work with
+        var els = document.getElementsByClassName('appear');
+        var elsl = els.length;
+        //  put html elements into an array object to work with
+        for(var i = 0; i < elsl; i += 1) {
+          // delay appears must have the appear class on them directly
+          var delay = els[i].getAttribute('data-delay');
+          if(delay) {
+            delayAppear(els[i], delay);
+          } else {
+            nodes.push(els[i]);
+          }
+        }
+      },
+      elements: nodes,
+      // function to run when an element is determined to be in view
+      appear: reveal,
+      bounds: 200,
+
+      // called when all nodes are visible
+      done: function done(){
+        console.log('all done');
+      }
+    };
+
+  }())
+);
+</script>
+<script>
+appear({
+  // function to get all elements to track
+  elements: function elements(){
+    return document.getElementsByClassName('footer');
+  },
+  // function to run when an element is in view
+  appear: function appear(el){
+    console.log('footer is visible');
+    el.innerHTML = '<h3 class="done">All images from <a href="http://simpledesktops.com">Simple Desktops</a></h3>';
+  },
+  // called when all nodes are visible
+  done: function done(){
+    console.log('footer done');
+  }
+});
+</script>
+</head>
+<body class="example-lazy">
+<%
+locals.message = 'the <img src=" ' + img.logo64 +  '" height=20 /> above lazyloaded after a one second timeout<br>lazyload images example below - scroll down<br>all images from <a href="http://simpledesktops.com">simpledesktops.com</a>';
+locals.delay = 'data-delay="1000" data-';
+%>
+<% include ../../cover %>
+
+<div class="content">
+<!--
+<div class="appear" data-delay="1000">
+
+</div> -->
+<h3 class="intro">these images lazy loaded individually</h3>
+<img class="appear" data-src="img/ChristmasJumperPaper.png" />
+<img class="appear" data-src="img/cubechaos2.png" />
+<img class="appear" data-src="img/Figure8.png" />
+<img class="appear" data-src="img/flowerWhite.png" />
+<img class="appear" data-src="img/Hole.png" />
+<img class="appear" data-src="img/ineedsleep.png" />
+<img class="appear" data-src="img/Intersection.png" />
+<img class="appear" data-src="img/multilayeredeye.png" />
+<img class="appear" data-src="img/road.png" />
+<img class="appear" data-src="img/see-ya-there.png" />
+<img class="appear" data-src="img/Simple_Shapes_11.png" />
+<img class="appear" data-src="img/summer_2.png" />
+<img class="appear" data-src="img/void.png" />
+<img class="appear" data-src="img/wallpaper.png" />
+<img class="appear" data-src="img/Western_Wallpaper_No_Grit.png" />
+
+<h3 class="intro">the images in this parent container are all loaded at once</h3>
+<div class="appear small">
+<img data-src="img/ChristmasJumperPaper.png" />
+<img data-src="img/cubechaos2.png" />
+<img data-src="img/Figure8.png" />
+<img data-src="img/flowerWhite.png" />
+<img data-src="img/Hole.png" />
+<img data-src="img/ineedsleep.png" />
+<img data-src="img/Intersection.png" />
+<img data-src="img/multilayeredeye.png" />
+<img data-src="img/road.png" />
+<img data-src="img/see-ya-there.png" />
+<img data-src="img/Simple_Shapes_11.png" />
+<img data-src="img/summer_2.png" />
+<img data-src="img/void.png" />
+<img data-src="img/wallpaper.png" />
+<img data-src="img/Western_Wallpaper_No_Grit.png" />
+</div>
+
+</div>
+</body>
+</html>

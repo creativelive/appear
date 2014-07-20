@@ -20,7 +20,8 @@ module.exports = function(gulp, conf) {
   gulp.task('ghpages', function(cb) {
 
     var readme = fs.readFileSync(path.join(process.cwd(), 'README.md'), 'utf8');
-    data.js.appear = fs.readFileSync(path.join(process.cwd(), 'dist', 'appear.min.js'), 'utf8');
+    data.js.appear = fs.readFileSync(path.join(process.cwd(), 'lib', 'appear.js'), 'utf8');
+    data.js.appearmin = fs.readFileSync(path.join(process.cwd(), 'dist', 'appear.min.js'), 'utf8');
 
     readme = readme.split('\n');
     // remove H1
@@ -30,9 +31,12 @@ module.exports = function(gulp, conf) {
 
     var templates = ejstpl({cwd: path.join(process.cwd(), 'templates')});
 
-    data.page = 'main';
+    fs.writeFileSync(path.join(process.cwd(), 'ghpages', 'index.html'), templates.index(data));
+    data.title = ' - simple example';
+    fs.writeFileSync(path.join(process.cwd(), 'ghpages', 'examples', 'simple', 'index.html'), templates['examples/simple/index'](data));
+    data.title = ' - lazyload example';
+    fs.writeFileSync(path.join(process.cwd(), 'ghpages', 'examples', 'lazy', 'index.html'), templates['examples/lazy/index'](data));
 
-    fs.writeFileSync(path.join(process.cwd(), 'ghpages', 'index.html'), templates.main(data));
     cb();
 
   });
