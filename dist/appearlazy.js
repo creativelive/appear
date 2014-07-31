@@ -1,21 +1,30 @@
-/* appearlazy.js 0.0.11 */
+/* appearlazy.js 0.0.12 */
 appear(
   (function() {
     'use strict';
     var nodes = [];
+
+    function addClass(el) {
+      if (el.classList) {
+        el.classList.add('appeared');
+      } else {
+        // IE9 compat
+        el.className += ' ' + 'appeared';
+      }
+    }
 
     // set the image src or background attribute
     function doReveal(el) {
       var src = el.getAttribute('data-src');
       if(src) {
         el.setAttribute('src', src);
-        el.classList.add('appeared');
+        addClass(el);
         return;
       }
       src = el.getAttribute('data-bkg');
       if(src) {
         el.style.backgroundImage = 'url("' + src + '")';
-        el.classList.add('appeared');
+        addClass(el);
         return;
       }
     }
