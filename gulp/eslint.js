@@ -8,7 +8,7 @@ module.exports = function(gulp, conf) {
       .pipe(eslint())
       .pipe(eslint.format())
       .on('data', function(file) {
-        if(file.eslint.messages){
+        if(file.eslint.messages && file.eslint.messages.length){
           gulp.fail = true;
         }
       });
