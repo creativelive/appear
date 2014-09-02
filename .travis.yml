@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "0.10"
+env:
+ global:
+   - GH_REF: github.com/creativelive/appear.git
+   - secure: ZropjhRGiY/ysCTR/raJlivOrpUZD+54p+ykgdlHLCGtztkGPKC1+6KIrdKRQQ0i6zO/M3WcvSXy5ZlttDwXGGfZ5CUwoXpmKDr9E3fvTiCr0aghsf6RUkpdCm9ML/Ngm2jlbDLPyaO6gBUz+jQcGPgmiblRKvbC3yxG4i1JF3E=
+after_success:
+ - mkdir .gh-pages
+ - npm run-script gh-pages
+ - cd .gh-pages
+ - git init
+ - git config user.name "cl-bender"
+ - git config user.email "matthew.hadley+bender@creativelive.com"
+ - git add .
+ - git commit -m "build gh-pages"
+ - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+
+branches:
+ only:
+   - master
