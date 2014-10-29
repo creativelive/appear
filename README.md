@@ -43,7 +43,7 @@ appear({
   disappear: function disappear(el){
     console.log('no longer visible', el);
   },
-  bounds 200,
+  bounds: 200,
   reappear: true
 });
 ```
