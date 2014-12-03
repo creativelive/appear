@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"no tests\"",
     "prepublish": "node_modules/gulp/bin/gulp.js build",
-    "gh-pages": "node_modules/gulp/bin/gulp.js build gh-pages"
+    "gh-pages": "node_modules/gulp/bin/gulp.js build gh-pages; cp -r assets/img .gh-pages/examples/lazy"
   },
   "author": "Matthew Hadley (https://github.com/diffsky)",
   "license": "MIT",
