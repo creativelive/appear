@@ -9,6 +9,7 @@ after_success:
  - mkdir .gh-pages
  - npm run-script gh-pages
  - cd .gh-pages
+ - touch .nojekyll
  - git init
  - git config user.name "cl-bender"
  - git config user.email "matthew.hadley+bender@creativelive.com"
