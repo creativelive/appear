@@ -9,24 +9,22 @@
   },
   "scripts": {
     "test": "echo \"no tests\"",
-    "prepublish": "node_modules/gulp/bin/gulp.js build",
-    "gh-pages": "node_modules/gulp/bin/gulp.js build gh-pages; cp -r assets/img .gh-pages/examples/lazy"
+    "prepublish": "gulp build",
+    "gh-pages": "gulp build gh-pages; cp -r assets/img .gh-pages/examples/lazy"
   },
   "author": "Matthew Hadley (https://github.com/diffsky)",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "^3.8.5",
-    "gulp-strip-debug": "^0.3.0",
-    "gulp-uglify": "^0.3.1",
-    "gulp-eslint": "^0.1.8",
-    "gulp-replace": "^0.4.0",
-    "marked": "^0.2.9",
-    "ejstpl": "^3.3.0",
-    "gulp-size": "^0.4.0",
-    "gulp-tap": "^0.1.1",
-    "mkdirp": "^0.5.0"
-  },
-  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-strip-debug": "^1.0.2",
+    "gulp-uglify": "^1.1.0",
+    "gulp-eslint": "^0.5.0",
+    "gulp-replace": "^0.5.3",
+    "marked": "^0.3.3",
+    "ejstpl": "^4.0.0",
+    "gulp-size": "^1.2.1",
+    "gulp-tap": "^0.1.3",
+    "mkdirp": "^0.5.0",
     "gulp-rename": "^1.2.0"
   },
   "repository": {

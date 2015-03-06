@@ -27,8 +27,8 @@ module.exports = function(gulp, conf) {
         showFiles: true
       }))
       .pipe(gulp.dest('dist'))
-      .pipe(rename(function(path) {
-        path.extname = '.min.js';
+      .pipe(rename(function(file) {
+        file.extname = '.min.js';
       }))
       .pipe(uglify())
       .pipe(tap(function(file, t) {

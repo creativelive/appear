@@ -1,10 +1,16 @@
 'use strict';
 
-var marked = require('marked');
 var path = require('path');
 var fs = require('fs');
 var ejstpl = require('ejstpl');
 var mkdirp = require('mkdirp').sync;
+
+var marked = require('marked');
+var renderer = new marked.Renderer();
+// don't add ids to headings
+renderer.heading = function(text, level) {
+  return '<h' + level + '>' + text + '</h' + level + '>';
+};
 
 module.exports = function(gulp, conf) {
 
@@ -30,7 +36,9 @@ module.exports = function(gulp, conf) {
     // remove H1
     readme.shift();
     readme = readme.join('\n');
-    data.readme = marked(readme);
+    data.readme = marked(readme, {
+      renderer: renderer
+    });
 
     var templates = ejstpl({cwd: path.join(process.cwd(), 'templates')});
 
