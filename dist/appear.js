@@ -1,4 +1,4 @@
-/* appear.js 0.0.14 */
+/* appear.js 1.0.0 */
 appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
@@ -205,8 +205,8 @@ appear = (function(){
 
         // add an event listener to init when dom is ready
         addEventListener('DOMContentLoaded', init);
-        // call init if document was already complete and we missed the event
-        if (document.readyState === 'complete' ) {
+        // call init if document is ready to be worked with and we missed the event
+        if (document.readyState === 'complete' || document.readyState === 'loaded' || document.readyState === 'interactive') {
           init();
         }
 
