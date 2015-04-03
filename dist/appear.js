@@ -1,4 +1,4 @@
-/* appear.js 1.0.0 */
+/* appear.js 1.0.1 */
 appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
@@ -8,7 +8,7 @@ appear = (function(){
     if ( scrollLastPos != null ){
       scroll.velocity = newPos - scrollLastPos;
       scroll.delta = (scroll.velocity >= 0) ? scroll.velocity : (-1 * scroll.velocity);
-
+      
     }
     scrollLastPos = newPos;
     if(scrollTimer){
@@ -42,7 +42,7 @@ appear = (function(){
         return function () {
           var self = this, args = arguments;
           clearTimeout(timer);
-
+          
           timer = setTimeout(function () {
             fn.apply(self, args);
           }, delay);
@@ -84,7 +84,7 @@ appear = (function(){
       }
 
       function removeListeners() {
-
+        
         removeEventListener('scroll', checkAppear, false);
         removeEventListener('resize', checkAppear, false);
       }
@@ -93,7 +93,7 @@ appear = (function(){
         if(done) {
           return;
         }
-
+        
         elements.forEach(function(n, i){
           if(n && viewable(n, opts.bounds)) {
             // only act if the element is eligible to reappear
@@ -102,7 +102,7 @@ appear = (function(){
               reappear[i] = false;
               // increment the count of appeared items
               appeared++;
-
+              
               // call the appear fn
               if(opts.appear) {
                 opts.appear(n);
@@ -120,7 +120,7 @@ appear = (function(){
               }
               // increment the dissappeared count
               disappeared++;
-
+              
               // if not tracking reappears, need to remove node here
               if(!opts.reappear) {
                 // stop tracking this node, which is now viewable

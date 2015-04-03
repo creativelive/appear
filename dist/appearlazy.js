@@ -1,4 +1,4 @@
-/* appearlazy.js 1.0.0 */
+/* appearlazy.js 1.0.1 */
 appear(
   (function() {
     'use strict';
