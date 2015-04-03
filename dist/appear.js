@@ -8,7 +8,7 @@ appear = (function(){
     if ( scrollLastPos != null ){
       scroll.velocity = newPos - scrollLastPos;
       scroll.delta = (scroll.velocity >= 0) ? scroll.velocity : (-1 * scroll.velocity);
-      
+
     }
     scrollLastPos = newPos;
     if(scrollTimer){
@@ -18,7 +18,7 @@ appear = (function(){
       scrollLastPos = null;
     }, 30);
   }
-  addEventListener('scroll', track);
+  addEventListener('scroll', track, false);
 
   // determine if a given element (plus an additional "bounds" area around it) is in the viewport
   function viewable(el, bounds){
@@ -42,7 +42,7 @@ appear = (function(){
         return function () {
           var self = this, args = arguments;
           clearTimeout(timer);
-          
+
           timer = setTimeout(function () {
             fn.apply(self, args);
           }, delay);
@@ -71,8 +71,8 @@ appear = (function(){
         doCheckAppear();
 
         // add relevant listeners
-        addEventListener('scroll', checkAppear);
-        addEventListener('resize', checkAppear);
+        addEventListener('scroll', checkAppear, false);
+        addEventListener('resize', checkAppear, false);
       }
 
       function end() {
@@ -84,16 +84,16 @@ appear = (function(){
       }
 
       function removeListeners() {
-        
-        removeEventListener('scroll', checkAppear);
-        removeEventListener('resize', checkAppear);
+
+        removeEventListener('scroll', checkAppear, false);
+        removeEventListener('resize', checkAppear, false);
       }
 
       function doCheckAppear() {
         if(done) {
           return;
         }
-        
+
         elements.forEach(function(n, i){
           if(n && viewable(n, opts.bounds)) {
             // only act if the element is eligible to reappear
@@ -102,7 +102,7 @@ appear = (function(){
               reappear[i] = false;
               // increment the count of appeared items
               appeared++;
-              
+
               // call the appear fn
               if(opts.appear) {
                 opts.appear(n);
@@ -120,7 +120,7 @@ appear = (function(){
               }
               // increment the dissappeared count
               disappeared++;
-              
+
               // if not tracking reappears, need to remove node here
               if(!opts.reappear) {
                 // stop tracking this node, which is now viewable
@@ -204,7 +204,7 @@ appear = (function(){
         };
 
         // add an event listener to init when dom is ready
-        addEventListener('DOMContentLoaded', init);
+        addEventListener('DOMContentLoaded', init, false);
         // call init if document is ready to be worked with and we missed the event
         if (document.readyState === 'complete' || document.readyState === 'loaded' || document.readyState === 'interactive') {
           init();
