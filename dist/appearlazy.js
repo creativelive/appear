@@ -23,6 +23,7 @@ appear(
         if (orig) {
           el.setAttribute('src', orig);
         }
+        el.removeEventListener('error');
       });
       var src = el.getAttribute('data-src');
       if (src) {
