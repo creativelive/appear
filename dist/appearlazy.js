@@ -15,24 +15,24 @@ appear(
 
     // set the image src or background attribute
     function doReveal(el) {
-	  var orig = el.getAttribute('src') || false;
-	  
+      var orig = el.getAttribute('src') || false;
+      
 
-	  el.addEventListener('error', function(e) {
-	    // on error put back the original image if available (usually a placeholder)
-		
-		if(orig) {
-	  	  el.setAttribute('src', orig);
-		}
-	  });
+      el.addEventListener('error', function(e) {
+        // on error put back the original image if available (usually a placeholder)
+        
+        if (orig) {
+          el.setAttribute('src', orig);
+        }
+      });
       var src = el.getAttribute('data-src');
-      if(src) {
+      if (src) {
         el.setAttribute('src', src);
         addClass(el);
         return;
       }
       src = el.getAttribute('data-bkg');
-      if(src) {
+      if (src) {
         el.style.backgroundImage = 'url("' + src + '")';
         addClass(el);
         return;
@@ -40,17 +40,17 @@ appear(
     }
 
     // find what element to work with, as we support containers of images
-    function reveal(el){
-      if(el.hasChildNodes()) {
+    function reveal(el) {
+      if (el.hasChildNodes()) {
         // dealing with a container try and find children
         var els = el.querySelectorAll('[data-src], [data-bkg]');
         var elsl = els.length;
-        if(elsl === 0) {
+        if (elsl === 0) {
           // node has children, but none have the attributes, so reveal
           // the node itself (use case: div with a background)
           doReveal(el);
         } else {
-          for(var j = 0; j < elsl; j++) {
+          for (var j = 0; j < elsl; j++) {
             doReveal(els[j]);
           }
         }
@@ -61,7 +61,7 @@ appear(
 
     // reveal an image after a specified timeout
     function delayAppear(el, delay) {
-      setTimeout(function(){
+      setTimeout(function() {
         reveal(el);
       }, delay);
     }
@@ -73,12 +73,12 @@ appear(
         var els = document.getElementsByClassName('appear');
         var elsl = els.length;
         //  put html elements into an array object to work with
-        for(var i = 0; i < elsl; i += 1) {
+        for (var i = 0; i < elsl; i += 1) {
           // some images are revealed on a simple timeout, instead of
           // viewport appears. These delays appears must have
           // the appear class on them directly
           var delay = els[i].getAttribute('data-delay');
-          if(delay) {
+          if (delay) {
             delayAppear(els[i], delay);
           } else {
             nodes.push(els[i]);
