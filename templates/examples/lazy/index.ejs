@@ -31,7 +31,7 @@ locals.delay = 'data-delay="1000" data-';
 <img class="appear" data-src="img/summer_2.png" />
 <img class="appear" data-src="img/void.png" />
 <img class="appear" data-src="img/wallpaper.png" />
-<img class="appear" data-src="img/Western_Wallpaper_No_Grit.png" />
+
 
 <h3 class="intro">the images in this parent container are loaded all at once</h3>
 <div class="appear small">
@@ -50,6 +50,18 @@ locals.delay = 'data-delay="1000" data-';
 <img data-src="img/void.png" />
 <img data-src="img/wallpaper.png" />
 <img data-src="img/Western_Wallpaper_No_Grit.png" />
+</div>
+
+<h3 class=intro>The images in this container are missing</h3>
+<div class='missing'>
+<p>A holding image or shim</p>
+<img class="appear" src="img/shim.png" data-src="img/missing.png" />
+<p>An alternate image</p>
+<img class="appear" src="img/void.png" data-src="img/missing.png" />
+<p>An inline data image</p>
+<img class="appear" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" data-src="img/missing.png" />
+<p>No holding image</p>
+<img class="appear" data-src="img/missing.png" />
 </div>
 
 <h2>appearlazy</h2>

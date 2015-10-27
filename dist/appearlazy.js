@@ -1,4 +1,4 @@
-/* appearlazy.js 1.0.1 */
+/* appearlazy.js 1.0.2 */
 appear(
   (function() {
     'use strict';
@@ -15,6 +15,16 @@ appear(
 
     // set the image src or background attribute
     function doReveal(el) {
+	  var orig = el.getAttribute('src') || false;
+	  
+
+	  el.addEventListener('error', function(e) {
+	    // on error put back the original image if available (usually a placeholder)
+		
+		if(orig) {
+	  	  el.setAttribute('src', orig);
+		}
+	  });
       var src = el.getAttribute('data-src');
       if(src) {
         el.setAttribute('src', src);
