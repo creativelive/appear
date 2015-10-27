@@ -16,7 +16,6 @@ appear(
     // set the image src or background attribute
     function doReveal(el) {
       var orig = el.getAttribute('src') || false;
-      
 
       el.addEventListener('error', function(e) {
         // on error put back the original image if available (usually a placeholder)
