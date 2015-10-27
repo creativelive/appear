@@ -1,0 +1,36 @@
+; EditorConfig http://EditorConfig.org
+; see http://editorconfig.org/#download for plugins for your editor
+
+; Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+; indent style
+indent_style = space
+
+; language rules
+[*.html]
+indent_size = 2
+insert_final_newline = false
+
+[*.dust]
+indent_size = 2
+insert_final_newline = false
+
+[*.hbs]
+indent_size = 2
+insert_final_newline = false
+
+[*.js]
+indent_size = 2
+
+[*.json]
+indent_size = 2
+
+[*.less]
+indent_size = 2
+
+; ignore third party
+[node_modules/**.js]
+indent_size = N/A
+indent_style = N/A
