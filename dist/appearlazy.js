@@ -17,14 +17,15 @@ appear(
     function doReveal(el) {
       var orig = el.getAttribute('src') || false;
 
-      el.addEventListener('error', function(e) {
+      el.addEventListener('error', function handler(e) {
         // on error put back the original image if available (usually a placeholder)
         
         if (orig) {
           el.setAttribute('src', orig);
         }
-        el.removeEventListener('error');
+        el.removeEventListener('error', handler); // hate this.
       });
+
       var src = el.getAttribute('data-src');
       if (src) {
         el.setAttribute('src', src);
