@@ -1,4 +1,4 @@
-/* appear.js 1.0.2 */
+/* appear.js 1.0.3 */
 appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
@@ -205,9 +205,22 @@ appear = (function(){
 
         // add an event listener to init when dom is ready
         addEventListener('DOMContentLoaded', init, false);
+
+        var isIE10 = false;
+        if (Function('/*@cc_on return document.documentMode===10@*/')()){
+          isIE10 = true;
+        }
+        var completeOrLoaded = document.readyState === 'complete' || document.readyState === 'loaded';
+
         // call init if document is ready to be worked with and we missed the event
-        if (document.readyState === 'complete' || document.readyState === 'loaded' || document.readyState === 'interactive') {
-          init();
+        if (isIE10) {
+          if (completeOrLoaded) {
+            init();
+          }
+        } else {
+          if (completeOrLoaded || document.readyState === 'interactive') {
+            init();
+          }
         }
 
         return {
