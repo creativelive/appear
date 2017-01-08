@@ -19,7 +19,7 @@ Call `appear()` passing in an object with the following:
 - `elements` *required* function that returns an htmlcollection of elements to track. The dom will be interactive at this point. Can alternatively be an existing htmlcollection instead of a function.
 - `appear` function to run when an element is in view, passed the element that has come into view. If defined then appear.js will track elements until they come into view.
 - `disappear` function to run when an element goes out of view, passed the element that has gone out of view. If defined then appear.js will track elements until they go out of view.
-- `reappear` if true appear.js will keep tracking elements for successfuive appears and dissappears. Default is false.
+- `reappear` if true appear.js will keep tracking elements for successive appears and dissappears. Default is false.
 - `bounds` increase, in pixels, to the threshold size of the element so it can be "viewable" before it is actually in the viewport.
 - `debounce` appear.js tracks elements on browser scroll and resize, for performance reasons this check is "debounced" to only happen once for multiple events, 50ms after the last event ends. You can override this value here.
 - `deltaSpeed` in addition to debouncing, appear.js will also check for items during continuous slow scrolling, you can controll how slow the scrolling should be via this value. Default is 50 (pixels).
