@@ -3,8 +3,8 @@ appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
 
-  function track(){
-    var newPos = window.scrollY || window.pageYOffset;  // pageYOffset for IE9
+  function track(ev){
+    var newPos = ev.target.scrollTop;  // pageYOffset for IE9
     if ( scrollLastPos != null ){
       scroll.velocity = newPos - scrollLastPos;
       scroll.delta = (scroll.velocity >= 0) ? scroll.velocity : (-1 * scroll.velocity);
@@ -18,16 +18,16 @@ appear = (function(){
       scrollLastPos = null;
     }, 30);
   }
-  addEventListener('scroll', track, false);
 
   // determine if a given element (plus an additional "bounds" area around it) is in the viewport
-  function viewable(el, bounds){
-    var rect = el.getBoundingClientRect();
+  function viewable(el, bounds, container){
+    var rect = el.getBoundingClientRect(),
+        rect_container = container.getBoundingClientRect();
     return (
       (rect.top + rect.height) >= 0 &&
       (rect.left + rect.width) >= 0 &&
-      (rect.bottom - rect.height) <= ( (window.innerHeight || document.documentElement.clientHeight) + bounds) &&
-      (rect.right - rect.width) <= ( (window.innerWidth || document.documentElement.clientWidth) + bounds)
+      (rect.bottom - rect.height) <= ( ( (rect_container.height + rect_container.y) || document.documentElement.clientHeight) + bounds) &&
+      (rect.right - rect.width) <= ( ( (rect_container.width + rect_container.x) || document.documentElement.clientWidth) + bounds)
     );
   }
 
@@ -71,8 +71,8 @@ appear = (function(){
         doCheckAppear();
 
         // add relevant listeners
-        addEventListener('scroll', checkAppear, false);
-        addEventListener('resize', checkAppear, false);
+        opts.container.addEventListener('scroll', checkAppear, false);
+        opts.container.addEventListener('resize', checkAppear, false);
       }
 
       function end() {
@@ -85,8 +85,8 @@ appear = (function(){
 
       function removeListeners() {
         
-        removeEventListener('scroll', checkAppear, false);
-        removeEventListener('resize', checkAppear, false);
+        opts.container.removeEventListener('scroll', checkAppear, false);
+        opts.container.removeEventListener('resize', checkAppear, false);
       }
 
       function doCheckAppear() {
@@ -95,7 +95,7 @@ appear = (function(){
         }
         
         elements.forEach(function(n, i){
-          if(n && viewable(n, opts.bounds)) {
+          if(n && viewable(n, opts.bounds, opts.container)) {
             // only act if the element is eligible to reappear
             if(reappear[i]) {
               // mark this element as not eligible to appear
@@ -151,6 +151,8 @@ appear = (function(){
         }
         initd = true;
 
+        opts.container.addEventListener('scroll', track, false);
+
         // call the obj init fn
         if(opts.init) {
           opts.init();
@@ -200,7 +202,8 @@ appear = (function(){
           delta: {
             speed: obj.deltaSpeed || 50,
             timeout: obj.deltaTimeout || 500
-          }
+          },
+          container: obj.container || window
         };
 
         // add an event listener to init when dom is ready
