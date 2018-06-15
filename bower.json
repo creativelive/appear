@@ -1,0 +1,27 @@
+{
+  "name": "appear",
+  "description": "utility to run functions when dom elements are visible",
+  "main": "appear.js",
+  "authors": [
+    "Matthew Hadley (https://github.com/diffsky)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "detect",
+    "viewable",
+    "elements",
+    "dom",
+    "lazy",
+    "load",
+    "scroll",
+    "lazyload"
+  ],
+  "homepage": "https://github.com/creativelive/appear",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

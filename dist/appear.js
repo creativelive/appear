@@ -1,4 +1,4 @@
-/* appear.js 1.0.3 */
+/* appear.js 1.1.0 */
 appear = (function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
@@ -206,6 +206,7 @@ appear = (function(){
         // add an event listener to init when dom is ready
         addEventListener('DOMContentLoaded', init, false);
 
+        // http://stackoverflow.com/questions/9900311/how-do-i-target-only-internet-explorer-10-for-certain-situations-like-internet-e/13971998#13971998
         var isIE10 = false;
         if (Function('/*@cc_on return document.documentMode===10@*/')()){
           isIE10 = true;
