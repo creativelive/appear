@@ -1,5 +1,5 @@
 /* appear.js 1.1.0 */
-appear = (function(){
+(function(window){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
 
@@ -173,7 +173,7 @@ appear = (function(){
         }
       }
 
-      return function(obj) {
+      var appear = function(obj) {
         obj = obj || {};
 
         // assign the fn to execute when a node is visible
@@ -244,6 +244,12 @@ appear = (function(){
         };
 
       };
+
+      if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+        module.exports = appear;
+      } else {
+        window.appear = appear;
+      }
     }()(obj));
   };
-}());
+}(this));
