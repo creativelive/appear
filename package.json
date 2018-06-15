@@ -1,6 +1,6 @@
 {
   "name": "appear",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "utility to run functions when dom elements are visible",
   "kewords": "detect viewable elements dom lazy load scroll ",
   "main": "appear.js",
@@ -34,5 +34,5 @@
   "bugs": {
     "url": "https://github.com/creativelive/appear/issues"
   },
-  "homepage": "https://github.com/creativelive/appear"
+  "homepage": "http://creativelive.github.io/appear/"
 }

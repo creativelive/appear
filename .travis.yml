@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "0.10"
+  - "4.8.6"
 env:
  global:
    - GH_REF: github.com/creativelive/appear.git
@@ -12,7 +12,7 @@ after_success:
  - touch .nojekyll
  - git init
  - git config user.name "cl-bender"
- - git config user.email "matthew.hadley+bender@creativelive.com"
+ - git config user.email "bender@creativelive.com"
  - git add .
  - git commit -m "build gh-pages"
  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
