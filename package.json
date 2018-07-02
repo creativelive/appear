@@ -1,6 +1,6 @@
 {
   "name": "appear",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "utility to run functions when dom elements are visible",
   "kewords": "detect viewable elements dom lazy load scroll ",
   "main": "dist/appear.js",
