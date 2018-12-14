@@ -18,9 +18,9 @@ module.exports = function(gulp, conf) {
     js: {},
     css: {},
     img: {
-      logo64: 'https://cdn.rawgit.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png',
-      hat: 'https://cdn.rawgit.com/creativelive/appear/715cd5df6c518493dc406365b0026cc7da92cf78/assets/magic-hat.png',
-      hatEmpty: 'https://cdn.rawgit.com/creativelive/appear/715cd5df6c518493dc406365b0026cc7da92cf78/assets/magic-hat-empty.png'
+      logo64: 'https://cdn.combinatronics.com/creativelive/appear/ac50b538687b3ab111131a02780373de479fca50/assets/appear-64.png',
+      hat: 'https://cdn.combinatronics.com/creativelive/appear/715cd5df6c518493dc406365b0026cc7da92cf78/assets/magic-hat.png',
+      hatEmpty: 'https://cdn.combinatronics.com/creativelive/appear/715cd5df6c518493dc406365b0026cc7da92cf78/assets/magic-hat-empty.png'
     }
   };
 
