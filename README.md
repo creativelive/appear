@@ -16,7 +16,7 @@ Include appear.js in your page, it has no dependencies.
 Call `appear()` passing in an object with the following:
 
 - `init` function to run when dom is interactive, but before appear.js has started tracking.
-- `elements` *required* function that returns an htmlcollection of elements to track. The dom will be interactive at this point. Can alternatively be an existing htmlcollection instead of a function.
+- `elements` *required* function that returns an htmlcollection of elements to track. The dom will be interactive at this point. Can alternatively be an existing htmlcollection instead of a function. Please make sure the value is array based, explain below on example part.
 - `appear` function to run when an element is in view, passed the element that has come into view. If defined then appear.js will track elements until they come into view.
 - `disappear` function to run when an element goes out of view, passed the element that has gone out of view. If defined then appear.js will track elements until they go out of view.
 - `reappear` if true appear.js will keep tracking elements for successive appears and dissappears. Default is false.
@@ -35,7 +35,10 @@ appear({
   },
   elements: function elements(){
     // work with all elements with the class "track"
-    return document.getElementsByClassName('track');
+    // make sure that the return value is array (in class context it will always array)
+    // if only one element return just add "[element]"
+    // ex: return [document.getElementById('track')];
+    return document.getElementsByClassName('track'); // this is for return many elements
   },
   appear: function appear(el){
     console.log('visible', el);
