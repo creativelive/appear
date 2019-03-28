@@ -35,7 +35,10 @@ appear({
   },
   elements: function elements(){
     // work with all elements with the class "track"
-    return document.getElementsByClassName('track');
+    // make sure that the return value is array (in class context it will always array)
+    // if only one element return just add "[element]"
+    // ex: return [document.getElementById('track')];
+    return document.getElementsByClassName('track'); // this is for return many elements
   },
   appear: function appear(el){
     console.log('visible', el);
